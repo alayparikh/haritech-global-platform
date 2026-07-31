@@ -59,11 +59,11 @@ export const Route = createFileRoute("/")({
 });
 
 const navLinks = [
-  { href: "#sectors", label: "Sectors" },
-  { href: "#capabilities", label: "Capabilities" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#clients", label: "Clients" },
+  { href: "#sectors", label: "Sectors", icon: Layers },
+  { href: "#capabilities", label: "Capabilities", icon: Gauge },
+  { href: "#services", label: "Services", icon: Wrench },
+  { href: "#about", label: "About", icon: Building2 },
+  { href: "#clients", label: "Clients", icon: Users },
 ];
 
 const sectors = [
