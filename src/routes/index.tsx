@@ -315,7 +315,7 @@ function Index() {
 
             <div className="mt-14 grid auto-rows-[minmax(0,1fr)] gap-5 md:grid-cols-2 lg:grid-cols-6">
               {sectors.map((sector, i) => {
-                const wide = i === 0 || i === 3;
+                const wide = i === 0 || i === 3 || i === 5;
                 return (
                   <article
                     key={sector.title}
