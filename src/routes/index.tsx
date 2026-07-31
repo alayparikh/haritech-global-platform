@@ -642,8 +642,13 @@ function Index() {
             <p>info@haritatechnology.com</p>
           </div>
           <nav className="flex flex-col gap-3 text-sm text-ink-muted">
-            {navLinks.concat({ href: "#contact", label: "Contact" }).map((l) => (
-              <a key={l.href} href={l.href} className="transition-colors hover:text-ink-foreground">
+            {navLinks.concat({ href: "#contact", label: "Contact", icon: Mail }).map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="group inline-flex items-center gap-2.5 transition-colors hover:text-ink-foreground"
+              >
+                <l.icon className="h-4 w-4 text-cyan/70 transition-colors group-hover:text-cyan" />
                 {l.label}
               </a>
             ))}
