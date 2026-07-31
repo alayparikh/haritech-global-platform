@@ -185,10 +185,16 @@ function Index() {
           <a href="#top" className="flex items-center">
             <img src={logo.url} alt="HariTech logo" className="h-10 w-auto" width={200} height={60} />
           </a>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
+          <nav className="hidden items-center gap-1 text-sm font-medium text-muted-foreground lg:flex">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="transition-colors hover:text-foreground">
+              <a
+                key={l.href}
+                href={l.href}
+                className="group relative inline-flex items-center gap-2 px-3 py-2 transition-colors hover:text-foreground"
+              >
+                <l.icon className="h-4 w-4 text-primary/70 transition-all duration-300 group-hover:text-primary" />
                 {l.label}
+                <span className="pointer-events-none absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             ))}
           </nav>
