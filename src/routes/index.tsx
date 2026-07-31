@@ -226,8 +226,11 @@ function Index() {
                   <a
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block border-b border-border/60 py-3 text-sm font-medium text-foreground"
+                    className="flex items-center gap-3 border-b border-border/60 py-3 text-sm font-medium text-foreground"
                   >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-sm bg-secondary text-primary">
+                      <l.icon className="h-4 w-4" />
+                    </span>
                     {l.label}
                   </a>
                 </li>
