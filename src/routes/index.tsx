@@ -142,13 +142,43 @@ const services = [
   { icon: Boxes, title: "Material Handling", copy: "Conveyors, crates, bins and racking systems engineered around your floor layout." },
 ];
 
-const clients = [
-  "JCB", "Reliance", "Torrent Power", "ENPAY", "L&T", "Hitachi", "Schneider Electric",
-  "NTPC", "ONGC", "Hero", "Sanghi Cement", "TATA", "Amul", "Mother Dairy",
-  "Xylem", "Essar", "Zydex", "FAG", "Nikkiso Cosmodyne", "LM Wind Power",
-  "Banco Products", "Time Technoplast", "Claris", "DSM", "Alleima", "Bray",
-  "Kömmerling", "Lucas-TVS", "Cadila Pharmaceuticals", "Jyoti", "ITT", "Chemco",
+type Client = { name: string; mark: string; style?: string };
+
+const clients: Client[] = [
+  { name: "JCB", mark: "JCB", style: "font-display font-extrabold tracking-[0.08em]" },
+  { name: "Reliance", mark: "RELIANCE", style: "font-display font-semibold tracking-[0.18em]" },
+  { name: "Torrent Power", mark: "TORRENT", style: "font-display font-bold tracking-[0.12em]" },
+  { name: "ENPAY", mark: "enpay", style: "font-display font-extrabold lowercase tracking-[-0.03em]" },
+  { name: "L&T", mark: "L&T", style: "font-display font-extrabold tracking-[0.06em]" },
+  { name: "Hitachi", mark: "HITACHI", style: "font-display font-medium tracking-[0.3em]" },
+  { name: "Schneider Electric", mark: "Schneider", style: "font-display font-bold tracking-[-0.02em]" },
+  { name: "NTPC", mark: "NTPC", style: "font-display font-extrabold tracking-[0.14em]" },
+  { name: "ONGC", mark: "ONGC", style: "font-display font-bold tracking-[0.2em]" },
+  { name: "Hero", mark: "HERO", style: "font-display font-extrabold italic tracking-[0.04em]" },
+  { name: "Sanghi Cement", mark: "SANGHI", style: "font-display font-semibold tracking-[0.16em]" },
+  { name: "TATA", mark: "TATA", style: "font-display font-extrabold tracking-[0.1em]" },
+  { name: "Amul", mark: "Amul", style: "font-display font-extrabold tracking-[-0.02em]" },
+  { name: "Mother Dairy", mark: "Mother Dairy", style: "font-display font-semibold tracking-[-0.01em]" },
+  { name: "Xylem", mark: "xylem", style: "font-display font-bold lowercase tracking-[0.02em]" },
+  { name: "Essar", mark: "ESSAR", style: "font-display font-bold tracking-[0.22em]" },
+  { name: "Zydex", mark: "ZYDEX", style: "font-display font-extrabold tracking-[0.06em]" },
+  { name: "FAG", mark: "FAG", style: "font-display font-extrabold tracking-[0.18em]" },
+  { name: "Nikkiso Cosmodyne", mark: "NIKKISO", style: "font-display font-medium tracking-[0.26em]" },
+  { name: "LM Wind Power", mark: "LM WIND", style: "font-display font-semibold tracking-[0.12em]" },
+  { name: "Banco Products", mark: "BANCO", style: "font-display font-bold tracking-[0.16em]" },
+  { name: "Time Technoplast", mark: "TIME", style: "font-display font-extrabold tracking-[0.1em]" },
+  { name: "Claris", mark: "Claris", style: "font-display font-semibold tracking-[0.04em]" },
+  { name: "DSM", mark: "DSM", style: "font-display font-extrabold tracking-[0.24em]" },
+  { name: "Alleima", mark: "alleima", style: "font-display font-semibold lowercase tracking-[0.04em]" },
+  { name: "Bray", mark: "BRAY", style: "font-display font-extrabold tracking-[0.12em]" },
+  { name: "Kömmerling", mark: "Kömmerling", style: "font-display font-semibold tracking-[-0.01em]" },
+  { name: "Lucas-TVS", mark: "LUCAS-TVS", style: "font-display font-bold tracking-[0.08em]" },
+  { name: "Cadila Pharmaceuticals", mark: "CADILA", style: "font-display font-semibold tracking-[0.18em]" },
+  { name: "Jyoti", mark: "JYOTI", style: "font-display font-extrabold tracking-[0.14em]" },
+  { name: "ITT", mark: "ITT", style: "font-display font-extrabold tracking-[0.22em]" },
+  { name: "Chemco", mark: "CHEMCO", style: "font-display font-semibold tracking-[0.14em]" },
 ];
+
 
 const stats = [
   { value: "14+", label: "Years serving industry" },
