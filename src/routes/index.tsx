@@ -313,32 +313,47 @@ function Index() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {sectors.map((sector) => (
-                <article
-                  key={sector.title}
-                  className="group relative overflow-hidden rounded-sm border border-border bg-card shadow-panel transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
-                >
-                  <div className="relative h-52 overflow-hidden">
+            <div className="mt-14 grid auto-rows-[minmax(0,1fr)] gap-5 md:grid-cols-2 lg:grid-cols-6">
+              {sectors.map((sector, i) => {
+                const wide = i === 0 || i === 3;
+                return (
+                  <article
+                    key={sector.title}
+                    className={`group relative isolate flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-sm border border-border/70 bg-ink text-ink-foreground shadow-panel transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift ${
+                      wide ? "lg:col-span-4" : "lg:col-span-2"
+                    }`}
+                  >
                     <img
                       src={sector.image}
                       alt={sector.title}
                       loading="lazy"
                       width={1024}
                       height={768}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="absolute inset-0 -z-10 h-full w-full object-cover opacity-55 transition-all duration-[900ms] group-hover:scale-105 group-hover:opacity-70"
                     />
-                    <div className="absolute inset-0 bg-gradient-ink opacity-30" />
-                    <span className="absolute bottom-4 left-4 inline-flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-brand text-primary-foreground shadow-panel">
-                      <sector.icon className="h-5 w-5" />
+                    <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/75 to-ink/10" />
+                    <span className="absolute right-5 top-5 font-display text-5xl font-bold leading-none text-ink-foreground/15 transition-colors duration-500 group-hover:text-cyan/40">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                  </div>
-                  <div className="p-7">
-                    <h3 className="text-lg font-semibold">{sector.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{sector.copy}</p>
-                  </div>
-                </article>
-              ))}
+                    <span className="absolute left-0 top-0 h-16 w-px bg-gradient-to-b from-cyan to-transparent" />
+                    <div className="p-7">
+                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-brand text-primary-foreground shadow-panel transition-transform duration-500 group-hover:-translate-y-1">
+                        <sector.icon className="h-5 w-5" />
+                      </span>
+                      <h3 className="mt-5 font-display text-xl font-semibold">{sector.title}</h3>
+                      <p
+                        className={`mt-3 text-sm leading-relaxed text-ink-muted ${wide ? "max-w-xl" : ""}`}
+                      >
+                        {sector.copy}
+                      </p>
+                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan opacity-0 transition-all duration-500 group-hover:opacity-100">
+                        Talk to an engineer
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
