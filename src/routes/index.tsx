@@ -26,6 +26,9 @@ import {
   Target,
   Eye,
   BadgeCheck,
+  Layers,
+  Building2,
+  Users,
 } from "lucide-react";
 
 import logo from "@/assets/haritech-logo.png.asset.json";
@@ -59,11 +62,11 @@ export const Route = createFileRoute("/")({
 });
 
 const navLinks = [
-  { href: "#sectors", label: "Sectors" },
-  { href: "#capabilities", label: "Capabilities" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#clients", label: "Clients" },
+  { href: "#sectors", label: "Sectors", icon: Layers },
+  { href: "#capabilities", label: "Capabilities", icon: Gauge },
+  { href: "#services", label: "Services", icon: Wrench },
+  { href: "#about", label: "About", icon: Building2 },
+  { href: "#clients", label: "Clients", icon: Users },
 ];
 
 const sectors = [
@@ -182,10 +185,16 @@ function Index() {
           <a href="#top" className="flex items-center">
             <img src={logo.url} alt="HariTech logo" className="h-10 w-auto" width={200} height={60} />
           </a>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
+          <nav className="hidden items-center gap-1 text-sm font-medium text-muted-foreground lg:flex">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="transition-colors hover:text-foreground">
+              <a
+                key={l.href}
+                href={l.href}
+                className="group relative inline-flex items-center gap-2 px-3 py-2 transition-colors hover:text-foreground"
+              >
+                <l.icon className="h-4 w-4 text-primary/70 transition-all duration-300 group-hover:text-primary" />
                 {l.label}
+                <span className="pointer-events-none absolute inset-x-3 bottom-0 h-px origin-left scale-x-0 bg-gradient-brand transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             ))}
           </nav>
@@ -217,8 +226,11 @@ function Index() {
                   <a
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block border-b border-border/60 py-3 text-sm font-medium text-foreground"
+                    className="flex items-center gap-3 border-b border-border/60 py-3 text-sm font-medium text-foreground"
                   >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-sm bg-secondary text-primary">
+                      <l.icon className="h-4 w-4" />
+                    </span>
                     {l.label}
                   </a>
                 </li>
@@ -301,32 +313,47 @@ function Index() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {sectors.map((sector) => (
-                <article
-                  key={sector.title}
-                  className="group relative overflow-hidden rounded-sm border border-border bg-card shadow-panel transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
-                >
-                  <div className="relative h-52 overflow-hidden">
+            <div className="mt-14 grid auto-rows-[minmax(0,1fr)] gap-5 md:grid-cols-2 lg:grid-cols-6">
+              {sectors.map((sector, i) => {
+                const wide = i === 0 || i === 3 || i === 5;
+                return (
+                  <article
+                    key={sector.title}
+                    className={`group relative isolate flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-sm border border-border/70 bg-ink text-ink-foreground shadow-panel transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift ${
+                      wide ? "lg:col-span-4" : "lg:col-span-2"
+                    }`}
+                  >
                     <img
                       src={sector.image}
                       alt={sector.title}
                       loading="lazy"
                       width={1024}
                       height={768}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="absolute inset-0 -z-10 h-full w-full object-cover opacity-55 transition-all duration-[900ms] group-hover:scale-105 group-hover:opacity-70"
                     />
-                    <div className="absolute inset-0 bg-gradient-ink opacity-30" />
-                    <span className="absolute bottom-4 left-4 inline-flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-brand text-primary-foreground shadow-panel">
-                      <sector.icon className="h-5 w-5" />
+                    <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/75 to-ink/10" />
+                    <span className="absolute right-5 top-5 font-display text-5xl font-bold leading-none text-ink-foreground/15 transition-colors duration-500 group-hover:text-cyan/40">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                  </div>
-                  <div className="p-7">
-                    <h3 className="text-lg font-semibold">{sector.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{sector.copy}</p>
-                  </div>
-                </article>
-              ))}
+                    <span className="absolute left-0 top-0 h-16 w-px bg-gradient-to-b from-cyan to-transparent" />
+                    <div className="p-7">
+                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-brand text-primary-foreground shadow-panel transition-transform duration-500 group-hover:-translate-y-1">
+                        <sector.icon className="h-5 w-5" />
+                      </span>
+                      <h3 className="mt-5 font-display text-xl font-semibold">{sector.title}</h3>
+                      <p
+                        className={`mt-3 text-sm leading-relaxed text-ink-muted ${wide ? "max-w-xl" : ""}`}
+                      >
+                        {sector.copy}
+                      </p>
+                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan opacity-0 transition-all duration-500 group-hover:opacity-100">
+                        Talk to an engineer
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -349,10 +376,21 @@ function Index() {
             </div>
 
             <div className="mt-14 grid gap-px bg-ink-foreground/10 sm:grid-cols-2 lg:grid-cols-4">
-              {capabilities.map((c) => (
-                <div key={c.title} className="bg-ink p-8 transition-colors hover:bg-ink-foreground/5">
-                  <c.icon className="h-7 w-7 text-cyan" />
-                  <h3 className="mt-6 text-base font-semibold text-ink-foreground">{c.title}</h3>
+              {capabilities.map((c, i) => (
+                <div
+                  key={c.title}
+                  className="group relative overflow-hidden bg-ink p-8 transition-colors duration-500 hover:bg-ink-foreground/5"
+                >
+                  <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-brand transition-transform duration-500 group-hover:scale-x-100" />
+                  <div className="flex items-start justify-between">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-sm border border-cyan/30 bg-cyan/10 text-cyan transition-colors duration-500 group-hover:bg-cyan group-hover:text-ink">
+                      <c.icon className="h-6 w-6" />
+                    </span>
+                    <span className="font-display text-xs font-semibold tracking-[0.2em] text-ink-muted/60">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 font-display text-base font-semibold text-ink-foreground">{c.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-ink-muted">{c.copy}</p>
                 </div>
               ))}
@@ -639,8 +677,13 @@ function Index() {
             <p>info@haritatechnology.com</p>
           </div>
           <nav className="flex flex-col gap-3 text-sm text-ink-muted">
-            {navLinks.concat({ href: "#contact", label: "Contact" }).map((l) => (
-              <a key={l.href} href={l.href} className="transition-colors hover:text-ink-foreground">
+            {navLinks.concat({ href: "#contact", label: "Contact", icon: Mail }).map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="group inline-flex items-center gap-2.5 transition-colors hover:text-ink-foreground"
+              >
+                <l.icon className="h-4 w-4 text-cyan/70 transition-colors group-hover:text-cyan" />
                 {l.label}
               </a>
             ))}
