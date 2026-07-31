@@ -529,13 +529,19 @@ function Index() {
             <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-3 lg:grid-cols-4">
               {clients.map((c) => (
                 <div
-                  key={c}
-                  className="flex min-h-20 items-center justify-center bg-card px-4 py-6 text-center text-sm font-semibold tracking-tight text-muted-foreground transition-colors hover:text-primary"
+                  key={c.name}
+                  title={c.name}
+                  className="group flex min-h-24 items-center justify-center bg-card px-4 py-7 text-center transition-colors hover:bg-secondary/70"
                 >
-                  {c}
+                  <span
+                    className={`text-base leading-none text-muted-foreground/80 transition-colors group-hover:text-primary sm:text-lg ${c.style ?? ""}`}
+                  >
+                    {c.mark}
+                  </span>
                 </div>
               ))}
             </div>
+
           </div>
         </section>
 
