@@ -204,7 +204,7 @@ function Index() {
               onClick={() => setMenuOpen((v) => !v)}
               className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-border text-foreground transition-colors hover:bg-secondary lg:hidden"
             >
-              {menuOpen ? <Menu className="h-5 w-5 hidden" /> : null}
+              
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
