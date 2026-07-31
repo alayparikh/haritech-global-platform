@@ -376,10 +376,21 @@ function Index() {
             </div>
 
             <div className="mt-14 grid gap-px bg-ink-foreground/10 sm:grid-cols-2 lg:grid-cols-4">
-              {capabilities.map((c) => (
-                <div key={c.title} className="bg-ink p-8 transition-colors hover:bg-ink-foreground/5">
-                  <c.icon className="h-7 w-7 text-cyan" />
-                  <h3 className="mt-6 text-base font-semibold text-ink-foreground">{c.title}</h3>
+              {capabilities.map((c, i) => (
+                <div
+                  key={c.title}
+                  className="group relative overflow-hidden bg-ink p-8 transition-colors duration-500 hover:bg-ink-foreground/5"
+                >
+                  <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-brand transition-transform duration-500 group-hover:scale-x-100" />
+                  <div className="flex items-start justify-between">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-sm border border-cyan/30 bg-cyan/10 text-cyan transition-colors duration-500 group-hover:bg-cyan group-hover:text-ink">
+                      <c.icon className="h-6 w-6" />
+                    </span>
+                    <span className="font-display text-xs font-semibold tracking-[0.2em] text-ink-muted/60">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 font-display text-base font-semibold text-ink-foreground">{c.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-ink-muted">{c.copy}</p>
                 </div>
               ))}
