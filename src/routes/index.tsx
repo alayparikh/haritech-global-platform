@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -14,6 +15,17 @@ import {
   Mail,
   Phone,
   MapPin,
+  Menu,
+  X,
+  Wind,
+  Droplets,
+  Filter,
+  Wrench,
+  Zap,
+  Boxes,
+  Target,
+  Eye,
+  BadgeCheck,
 } from "lucide-react";
 
 import logo from "@/assets/haritech-logo.png.asset.json";
@@ -29,22 +41,30 @@ import renewableImg from "@/assets/sector-renewable.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HariTech — Engineering & Heavy Industries" },
+      { title: "HariTech — Engineering & Heavy Industries, Vadodara" },
       {
         name: "description",
         content:
-          "HariTech engineers heavy industry, assembly supply chain, electronics, dairy, metal and renewable systems. Intense to high impact.",
+          "HariTech Automations engineers HVAC&R, piping, energy, water treatment, filtration and automation systems for heavy industry — 14+ years of field experience.",
       },
       { property: "og:title", content: "HariTech — Engineering & Heavy Industries" },
       {
         property: "og:description",
         content:
-          "Precision engineering and turnkey industrial systems across six sectors, built for uptime and scale.",
+          "Turnkey industrial engineering across six sectors — HVAC&R, piping, energy, water treatment, automation and material handling.",
       },
     ],
   }),
   component: Index,
 });
+
+const navLinks = [
+  { href: "#sectors", label: "Sectors" },
+  { href: "#capabilities", label: "Capabilities" },
+  { href: "#services", label: "Services" },
+  { href: "#about", label: "About" },
+  { href: "#clients", label: "Clients" },
+];
 
 const sectors = [
   {
@@ -61,7 +81,7 @@ const sectors = [
   },
   {
     title: "Electronics Industries",
-    copy: "Controlled-environment PCB assembly, control panels and instrumentation with full traceability at every stage.",
+    copy: "Controlled-environment assembly, control panels and instrumentation with full traceability at every stage.",
     image: electronicsImg,
     icon: CircuitBoard,
   },
@@ -89,7 +109,7 @@ const capabilities = [
   {
     icon: Workflow,
     title: "Concept to commissioning",
-    copy: "One accountable team from feasibility studies and CAD through installation, validation and handover.",
+    copy: "One accountable team from feasibility studies and design through installation, validation and handover.",
   },
   {
     icon: Gauge,
@@ -104,18 +124,57 @@ const capabilities = [
   {
     icon: Globe2,
     title: "Multi-sector sourcing",
-    copy: "A qualified supplier network spanning metals, electronics and process equipment across regions.",
+    copy: "A qualified supplier network spanning metals, electronics and process equipment across India and overseas.",
   },
 ];
 
+const services = [
+  { icon: Wind, title: "HVAC & R Systems", copy: "Air handling units, chillers, clean-room and refrigeration systems sized to real plant load." },
+  { icon: Droplets, title: "Water Treatment", copy: "RO, ETP, STP and process water systems with reuse and discharge compliance built in." },
+  { icon: Wind, title: "Exhaust Ventilation", copy: "Fume, dust and heat extraction designed for operator safety and statutory limits." },
+  { icon: Filter, title: "Industrial Filtration", copy: "All types of industrial filter systems for air, liquid and process streams." },
+  { icon: Wrench, title: "Piping Projects", copy: "Gas, water, air and fire line piping — fabrication, erection, testing and certification." },
+  { icon: Zap, title: "Energy Projects", copy: "Energy audits, heat recovery and efficiency retrofits that pay back in operating cost." },
+  { icon: Cog, title: "Automations", copy: "PLC, SCADA and control panel automation for process lines and utility plants." },
+  { icon: Boxes, title: "Material Handling", copy: "Conveyors, crates, bins and racking systems engineered around your floor layout." },
+];
+
+const clients = [
+  "JCB", "Reliance", "Torrent Power", "ENPAY", "L&T", "Hitachi", "Schneider Electric",
+  "NTPC", "ONGC", "Hero", "Sanghi Cement", "TATA", "Amul", "Mother Dairy",
+  "Xylem", "Essar", "Zydex", "FAG", "Nikkiso Cosmodyne", "LM Wind Power",
+  "Banco Products", "Time Technoplast", "Claris", "DSM", "Alleima", "Bray",
+  "Kömmerling", "Lucas-TVS", "Cadila Pharmaceuticals", "Jyoti", "ITT", "Chemco",
+];
+
 const stats = [
+  { value: "14+", label: "Years serving industry" },
   { value: "6", label: "Industrial sectors served" },
-  { value: "18+", label: "Years of field engineering" },
   { value: "400+", label: "Projects commissioned" },
   { value: "99.2%", label: "Delivered uptime target" },
 ];
 
+const principles = [
+  {
+    icon: Target,
+    title: "Mission",
+    copy: "A lean, cost-efficient service organisation built on product reliability — surpassing customer expectations of quality and delivery through sustainable processes and an empowered team.",
+  },
+  {
+    icon: Eye,
+    title: "Vision",
+    copy: "To be a customer-oriented, environment-friendly benchmark for power-train service, execution and solution delivery.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Quality policy",
+    copy: "Continual improvement of a well-defined quality management system, innovative process approaches, and recognition worldwide for premium quality, reliability and durability.",
+  },
+];
+
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
@@ -124,19 +183,57 @@ function Index() {
             <img src={logo.url} alt="HariTech logo" className="h-10 w-auto" width={200} height={60} />
           </a>
           <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
-            <a href="#sectors" className="transition-colors hover:text-foreground">Sectors</a>
-            <a href="#capabilities" className="transition-colors hover:text-foreground">Capabilities</a>
-            <a href="#about" className="transition-colors hover:text-foreground">About</a>
-            <a href="#process" className="transition-colors hover:text-foreground">Process</a>
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} className="transition-colors hover:text-foreground">
+                {l.label}
+              </a>
+            ))}
           </nav>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-sm bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-panel transition-transform hover:-translate-y-0.5"
-          >
-            Talk to engineering
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href="#contact"
+              className="hidden items-center gap-2 rounded-sm bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-panel transition-transform hover:-translate-y-0.5 sm:inline-flex"
+            >
+              Talk to engineering
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <button
+              type="button"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-border text-foreground transition-colors hover:bg-secondary lg:hidden"
+            >
+              {menuOpen ? <Menu className="h-5 w-5 hidden" /> : null}
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
+        {menuOpen && (
+          <nav className="border-t border-border bg-background px-6 pb-6 pt-2 lg:hidden">
+            <ul className="flex flex-col">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="block border-b border-border/60 py-3 text-sm font-medium text-foreground"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground"
+            >
+              Talk to engineering
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </nav>
+        )}
       </header>
 
       <main id="top">
@@ -152,7 +249,7 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-ink opacity-80" />
           <div className="relative mx-auto max-w-7xl px-6 pb-28 pt-28 md:pb-40 md:pt-36">
             <div className="max-w-3xl rise">
-              <p className="eyebrow text-cyan">Intense to high impact</p>
+              <p className="eyebrow text-cyan">14+ years · Vadodara, India</p>
               <h1 className="mt-6 text-4xl font-bold leading-[1.05] text-ink-foreground sm:text-6xl md:text-7xl">
                 Industrial systems engineered for the long shift.
               </h1>
@@ -263,8 +360,36 @@ function Index() {
           </div>
         </section>
 
+        {/* Services */}
+        <section id="services" className="py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="max-w-2xl">
+              <p className="eyebrow text-primary">Services & solutions</p>
+              <h2 className="mt-4 text-3xl font-bold sm:text-5xl">Everything the plant needs, under one contract.</h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+                Manufacturer, supplier, service and solution provider for utility and process systems —
+                delivered as standard packages or fully customised engineering projects.
+              </p>
+            </div>
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {services.map((s) => (
+                <div
+                  key={s.title}
+                  className="rounded-sm border border-border bg-card p-7 shadow-panel transition-transform hover:-translate-y-1"
+                >
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-sm bg-gradient-brand text-primary-foreground">
+                    <s.icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-6 text-base font-semibold">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* About */}
-        <section id="about" className="py-24 md:py-32">
+        <section id="about" className="border-t border-border py-24 md:py-32">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
             <div className="relative">
               <img
@@ -276,7 +401,7 @@ function Index() {
                 className="rounded-sm object-cover shadow-lift"
               />
               <div className="absolute -bottom-8 -right-4 hidden rounded-sm bg-gradient-brand p-7 text-primary-foreground shadow-lift sm:block">
-                <p className="font-display text-4xl font-bold">18+</p>
+                <p className="font-display text-4xl font-bold">14+</p>
                 <p className="mt-1 text-xs uppercase tracking-[0.18em] opacity-90">Years on the floor</p>
               </div>
             </div>
@@ -286,18 +411,20 @@ function Index() {
                 An engineering partner, not a vendor.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                HariTech was founded by process and mechanical engineers who spent their careers
-                commissioning plants. That origin still shapes how we work — pragmatic specifications,
-                honest lead times, and hardware chosen for serviceability over spec-sheet gloss.
+                HariTech is a manufacturer and service provider for HVAC&amp;R systems, piping projects
+                (gas, water, air and fire lines), energy projects, water treatment, structural work,
+                ventilation, filtration, automation and material handling — backed by a team with more
+                than 14 years of experience.
               </p>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                From a single retrofit to a greenfield line, our teams stay on site until output is
-                stable and your people can run it without us.
+                Our range is built to industry quality standards, with sturdy construction and energy
+                efficiency tuned to each client's need. From a single retrofit to a greenfield line, our
+                teams stay on site until output is stable and your people can run it without us.
               </p>
               <ul className="mt-8 space-y-4">
                 {[
                   "In-house design, fabrication and automation teams",
-                  "Qualified multi-region sourcing and expediting",
+                  "Qualified sourcing across Indian and overseas markets",
                   "Lifecycle service contracts with guaranteed response",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm">
@@ -308,10 +435,44 @@ function Index() {
               </ul>
             </div>
           </div>
+
+          <div className="mx-auto mt-20 grid max-w-7xl gap-6 px-6 md:grid-cols-3">
+            {principles.map((p) => (
+              <div key={p.title} className="rounded-sm border border-border bg-secondary/50 p-8">
+                <p.icon className="h-6 w-6 text-primary" />
+                <h3 className="mt-5 text-lg font-semibold">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.copy}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Clients */}
+        <section id="clients" className="border-y border-border bg-secondary/60 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="max-w-2xl">
+              <p className="eyebrow text-primary">Esteemed customers</p>
+              <h2 className="mt-4 text-3xl font-bold sm:text-5xl">Trusted on demanding floors.</h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+                A partial list of the organisations whose plants, utilities and process lines we have
+                engineered, supplied or serviced.
+              </p>
+            </div>
+            <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-3 lg:grid-cols-4">
+              {clients.map((c) => (
+                <div
+                  key={c}
+                  className="flex min-h-20 items-center justify-center bg-card px-4 py-6 text-center text-sm font-semibold tracking-tight text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {c}
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Process */}
-        <section id="process" className="border-y border-border bg-secondary/60 py-24 md:py-32">
+        <section id="process" className="py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6">
             <div className="max-w-2xl">
               <p className="eyebrow text-primary">How we deliver</p>
@@ -335,7 +496,7 @@ function Index() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="py-24 md:py-32">
+        <section id="contact" className="pb-24 md:pb-32">
           <div className="mx-auto max-w-7xl px-6">
             <div className="relative overflow-hidden rounded-sm bg-gradient-brand px-8 py-16 shadow-lift md:px-16 md:py-20">
               <div className="relative grid gap-12 lg:grid-cols-2">
@@ -348,16 +509,37 @@ function Index() {
                     Send a scope, a drawing or just a problem statement. An engineer — not a
                     salesperson — responds within one working day.
                   </p>
-                  <div className="mt-10 space-y-4 text-sm">
-                    <p className="flex items-center gap-3">
-                      <Mail className="h-4 w-4 opacity-80" /> projects@haritech.com
-                    </p>
-                    <p className="flex items-center gap-3">
-                      <Phone className="h-4 w-4 opacity-80" /> +1 (555) 018-4420
-                    </p>
-                    <p className="flex items-center gap-3">
-                      <MapPin className="h-4 w-4 opacity-80" /> Industrial Park East, Sector 7
-                    </p>
+                  <div className="mt-10 space-y-5 text-sm">
+                    <div className="flex items-start gap-3">
+                      <Mail className="mt-0.5 h-4 w-4 flex-none opacity-80" />
+                      <span>
+                        <a href="mailto:info@haritatechnology.com" className="block hover:underline">
+                          info@haritatechnology.com
+                        </a>
+                        <a href="mailto:enquiry@haritatechnology.com" className="block hover:underline">
+                          enquiry@haritatechnology.com
+                        </a>
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Phone className="mt-0.5 h-4 w-4 flex-none opacity-80" />
+                      <span>
+                        <a href="tel:+919825743029" className="block hover:underline">+91 98257 43029</a>
+                        <a href="tel:+917802058470" className="block hover:underline">+91 78020 58470</a>
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <MapPin className="mt-0.5 h-4 w-4 flex-none opacity-80" />
+                      <address className="not-italic leading-relaxed">
+                        Haritech Automations Pvt. Ltd.
+                        <br />
+                        TF14, VR One, Opp. L&amp;T Knowledge City
+                        <br />
+                        NH 48, Between Ajwa-Waghodia Crossing
+                        <br />
+                        Vadodara, Gujarat, India-390019
+                      </address>
+                    </div>
                   </div>
                 </div>
 
@@ -382,14 +564,23 @@ function Index() {
                       />
                     </label>
                   </div>
-                  <label className="block text-sm">
-                    <span className="font-medium">Email</span>
-                    <input
-                      type="email"
-                      required
-                      className="mt-2 w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
-                    />
-                  </label>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <label className="block text-sm">
+                      <span className="font-medium">Email</span>
+                      <input
+                        type="email"
+                        required
+                        className="mt-2 w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
+                      />
+                    </label>
+                    <label className="block text-sm">
+                      <span className="font-medium">Mobile</span>
+                      <input
+                        type="tel"
+                        className="mt-2 w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
+                      />
+                    </label>
+                  </div>
                   <label className="block text-sm">
                     <span className="font-medium">Sector</span>
                     <select className="mt-2 w-full rounded-sm border border-input bg-card px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30">
@@ -420,7 +611,7 @@ function Index() {
       </main>
 
       <footer className="border-t border-border bg-ink py-14">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 md:flex-row md:items-start md:justify-between">
           <div>
             <img
               src={logo.url}
@@ -431,18 +622,32 @@ function Index() {
               className="h-10 w-auto brightness-0 invert"
             />
             <p className="mt-4 max-w-sm text-sm text-ink-muted">
-              Engineering, heavy industries and industrial supply chain solutions. Intense to high impact.
+              Engineering, heavy industries and industrial supply chain solutions. Serving industry for
+              over 14 years from Vadodara, Gujarat.
             </p>
           </div>
-          <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-muted">
-            <a href="#sectors" className="transition-colors hover:text-ink-foreground">Sectors</a>
-            <a href="#capabilities" className="transition-colors hover:text-ink-foreground">Capabilities</a>
-            <a href="#about" className="transition-colors hover:text-ink-foreground">About</a>
-            <a href="#contact" className="transition-colors hover:text-ink-foreground">Contact</a>
+          <div className="text-sm text-ink-muted">
+            <p className="font-semibold text-ink-foreground">Haritech Automations Pvt. Ltd.</p>
+            <address className="mt-2 not-italic leading-relaxed">
+              TF14, VR One, Opp. L&amp;T Knowledge City
+              <br />
+              NH 48, Between Ajwa-Waghodia Crossing
+              <br />
+              Vadodara, Gujarat, India-390019
+            </address>
+            <p className="mt-3">+91 98257 43029 · +91 78020 58470</p>
+            <p>info@haritatechnology.com</p>
+          </div>
+          <nav className="flex flex-col gap-3 text-sm text-ink-muted">
+            {navLinks.concat({ href: "#contact", label: "Contact" }).map((l) => (
+              <a key={l.href} href={l.href} className="transition-colors hover:text-ink-foreground">
+                {l.label}
+              </a>
+            ))}
           </nav>
         </div>
         <div className="mx-auto mt-10 max-w-7xl border-t border-ink-foreground/10 px-6 pt-6 text-xs text-ink-muted">
-          © {new Date().getFullYear()} HariTech. All rights reserved.
+          © {new Date().getFullYear()} Haritech Automations Pvt. Ltd. All rights reserved.
         </div>
       </footer>
     </div>
