@@ -26,6 +26,9 @@ import {
   Target,
   Eye,
   BadgeCheck,
+  Layers,
+  Building2,
+  Users,
 } from "lucide-react";
 
 import logo from "@/assets/haritech-logo.png.asset.json";
