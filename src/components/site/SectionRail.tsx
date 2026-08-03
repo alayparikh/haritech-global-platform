@@ -31,7 +31,11 @@ export function SectionRail({ sections }: { sections: RailSection[] }) {
   return (
     <nav
       aria-label="On this page"
-      className="pointer-events-none fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
+      // Only rendered once the viewport is wide enough to give the rail its own
+      // gutter. The content container is 1280px, the rail about 180px plus its
+      // offset, so anything under ~1700px would put it on top of the text —
+      // which is exactly what it used to do at xl.
+      className="pointer-events-none fixed right-6 top-1/2 z-40 hidden w-44 -translate-y-1/2 min-[1700px]:block"
     >
       <ul className="pointer-events-auto flex flex-col gap-1 rounded-sm border border-border/70 bg-background/85 p-2 shadow-panel backdrop-blur-xl">
         {sections.map((s) => (

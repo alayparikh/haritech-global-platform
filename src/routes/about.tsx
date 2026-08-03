@@ -132,9 +132,6 @@ function About() {
       </Section>
 
       <Section id="venture" tone="ink" className="relative isolate overflow-hidden">
-        {/* The two flags carry the joint venture faster than the copy does, so
-            they sit behind the section — heavily damped, since the section's
-            job is still to be readable. */}
         <img
           src={ventureImg}
           alt=""
@@ -142,25 +139,46 @@ function About() {
           loading="lazy"
           width={1087}
           height={650}
-          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
+          // Background only from md up. On a narrow, tall band `cover` crops so
+          // hard that the flags become colour blur, so small screens get the
+          // in-flow banner below instead.
+          className="absolute inset-0 -z-10 hidden h-full w-full object-cover md:block"
         />
-        {/* Directional scrim: heaviest under the copy on the left, where white
-            type would otherwise land on the flag's white stripe, and thin on
-            the right so the flags stay legible as flags. */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
+        {/* Even, light scrim only. An earlier left-heavy gradient sat exactly
+            over the Indian flag and crushed it; contrast for the type is
+            handled by the panels below instead, so both flags stay bright. */}
         <div className="absolute inset-0 -z-10 bg-ink/25" />
+        {/* Seams into the light sections above and below. */}
+        <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-ink/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-ink/70 to-transparent" />
+
         <Container className="relative">
-          <SectionHeading
-            tone="dark"
-            eyebrow="Two countries, one team"
-            title={`${company.venture.long}.`}
-            aside={company.venture.copy}
+          <img
+            src={ventureImg}
+            alt="The flags of India and the United States"
+            loading="lazy"
+            width={1087}
+            height={650}
+            className="mb-6 aspect-[16/9] w-full rounded-sm border border-ink-foreground/15 object-cover shadow-lift md:hidden"
           />
-          <Reveal className={`${HEADING_GAP} grid gap-px bg-ink-foreground/10 md:grid-cols-2`}>
+
+          {/* The heading carries its own plate rather than darkening the whole
+              band — white type would otherwise land on the flag's white
+              stripes, which is the one place it cannot be read. */}
+          <div className="max-w-4xl rounded-sm bg-ink/80 p-8 shadow-lift backdrop-blur-md md:p-10">
+            <SectionHeading
+              tone="dark"
+              eyebrow="Two countries, one team"
+              title={`${company.venture.long}.`}
+              aside={company.venture.copy}
+            />
+          </div>
+
+          <Reveal className="mt-6 grid gap-6 md:grid-cols-2">
             {ventureSides.map((side) => (
               <div
                 key={side.place}
-                className="group flex flex-col bg-ink/85 p-8 backdrop-blur-md md:p-10"
+                className="group flex flex-col rounded-sm bg-ink/80 p-8 shadow-lift backdrop-blur-md md:p-10"
               >
                 <IconChip icon={side.icon} variant="outline-dark" />
                 <p className="eyebrow mt-6 text-cyan">{side.place}</p>
@@ -182,8 +200,8 @@ function About() {
               <Portrait name={leadership.name} className="mx-auto max-w-sm lg:mx-0" />
             </div>
 
-            {/* Stops short of col 12: the fixed section rail sits over the
-                right edge of the container on xl. */}
+            {/* Stops short of col 12 to keep the measure readable — a full
+                eight columns runs past 110 characters a line. */}
             <div className="lg:col-span-7 xl:col-span-6">
               <h3 className="font-display text-3xl font-bold">{leadership.name}</h3>
               <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
