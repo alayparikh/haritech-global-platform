@@ -114,8 +114,15 @@
 
   --gradient-brand: linear-gradient(120deg, var(--brand-deep), var(--brand) 55%, var(--cyan));
   --gradient-ink: linear-gradient(160deg, oklch(0.17 0.035 252), oklch(0.26 0.05 248));
-  --shadow-panel: 0 24px 60px -32px oklch(0.36 0.095 248 / 0.45);
-  --shadow-lift: 0 32px 70px -30px oklch(0.36 0.095 248 / 0.55);
+  /* Two-part shadows: a hairline that reads at rest + a soft cast for depth. */
+  --shadow-panel:
+    0 1px 2px oklch(0.36 0.095 248 / 0.06), 0 18px 40px -28px oklch(0.36 0.095 248 / 0.4);
+  --shadow-lift:
+    0 2px 4px oklch(0.36 0.095 248 / 0.08), 0 32px 70px -30px oklch(0.36 0.095 248 / 0.55);
+
+  /* Fluid heading scale — one ramp, no per-page font-size guessing. */
+  --text-hero: clamp(2.5rem, 1.55rem + 4.2vw, 4.5rem);
+  --text-section: clamp(1.875rem, 1.35rem + 2.3vw, 3rem);
 }
 
 .dark {
@@ -136,11 +143,32 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.68 0.13 230);
+
+  /* Ink sections must still read as a deeper plane than the page itself,
+     otherwise every `tone="ink"` band disappears in dark mode. */
+  --ink: oklch(0.12 0.025 252);
+  --ink-muted: oklch(0.7 0.02 245);
+  --brand-deep: oklch(0.42 0.11 246);
+  --gradient-ink: linear-gradient(160deg, oklch(0.1 0.022 252), oklch(0.18 0.04 250));
+  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.5), 0 18px 40px -28px oklch(0 0 0 / 0.7);
+  --shadow-lift: 0 2px 6px oklch(0 0 0 / 0.55), 0 32px 70px -30px oklch(0 0 0 / 0.85);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Clears the sticky header so anchored headings are never hidden behind it. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -156,6 +184,37 @@
   h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One visible focus treatment for the whole site. Keyboard only, so it never
+     fires on mouse clicks — but it is never removed. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Ink surfaces need a light ring; the brand ring vanishes against them. */
+  .bg-ink :focus-visible,
+  .bg-gradient-ink :focus-visible,
+  .bg-gradient-brand :focus-visible {
+    outline-color: var(--ink-foreground);
+  }
+
+  a,
+  button,
+  [role="button"],
+  summary {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 25%, transparent);
   }
 }
 
@@ -191,9 +250,103 @@
 
 @utility grid-lines {
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--brand) 12%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--brand) 12%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--brand) 12%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--brand) 12%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 72px 72px;
+}
+
+@utility text-hero {
+  font-size: var(--text-hero);
+  line-height: 1.02;
+}
+
+@utility text-section {
+  font-size: var(--text-section);
+  line-height: 1.08;
+}
+
+/* Soft brand light source — gives flat ink panels a focal point. */
+@utility brand-glow {
+  background:
+    radial-gradient(
+      55% 60% at 12% 0%,
+      color-mix(in oklab, var(--brand) 42%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 55% at 92% 100%,
+      color-mix(in oklab, var(--cyan) 26%, transparent),
+      transparent 70%
+    );
+}
+
+/* Fades an ink section into the surface below it, so bands don't hard-cut. */
+@utility ink-fade-bottom {
+  background: linear-gradient(to top, var(--background), transparent);
+}
+
+/* Scroll reveal — see use-reveal.ts. Starts hidden only when JS marks it,
+   so a no-JS or reduced-motion visitor always sees the content. */
+@utility reveal {
+  opacity: 1;
+
+  &[data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  &[data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Client strip. The track holds two identical copies, so translating by half
+   its width lands exactly on the seam and the loop is invisible. */
+@utility marquee {
+  animation: marquee 60s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 @utility rise {
@@ -208,5 +361,15 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes cue {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
   }
 }

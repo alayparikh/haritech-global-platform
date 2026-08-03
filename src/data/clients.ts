@@ -1,0 +1,172 @@
+export type Client = {
+  name: string;
+  mark: string;
+  category: string;
+  /** Weight / tracking / case only — never font-size, so every mark shares one optical scale. */
+  style?: string;
+};
+
+export const clients: Client[] = [
+  {
+    name: "JCB",
+    mark: "JCB",
+    category: "Heavy equipment",
+    style: "font-extrabold tracking-[0.08em]",
+  },
+  {
+    name: "Reliance",
+    mark: "RELIANCE",
+    category: "Energy",
+    style: "font-semibold tracking-[0.18em]",
+  },
+  {
+    name: "Torrent Power",
+    mark: "TORRENT",
+    category: "Power",
+    style: "font-bold tracking-[0.12em]",
+  },
+  {
+    name: "ENPAY",
+    mark: "enpay",
+    category: "Transformer systems",
+    style: "font-extrabold lowercase tracking-normal",
+  },
+  { name: "L&T", mark: "L&T", category: "Engineering", style: "font-extrabold tracking-[0.06em]" },
+  {
+    name: "Hitachi",
+    mark: "HITACHI",
+    category: "Industrial systems",
+    style: "font-medium tracking-[0.22em]",
+  },
+  {
+    name: "Schneider Electric",
+    mark: "Schneider",
+    category: "Electrical",
+    style: "font-bold tracking-normal",
+  },
+  {
+    name: "NTPC",
+    mark: "NTPC",
+    category: "Power generation",
+    style: "font-extrabold tracking-[0.14em]",
+  },
+  { name: "ONGC", mark: "ONGC", category: "Oil & gas", style: "font-bold tracking-[0.2em]" },
+  {
+    name: "Hero",
+    mark: "HERO",
+    category: "Automotive",
+    style: "font-extrabold italic tracking-[0.04em]",
+  },
+  {
+    name: "Sanghi Cement",
+    mark: "SANGHI",
+    category: "Cement",
+    style: "font-semibold tracking-[0.16em]",
+  },
+  {
+    name: "TATA",
+    mark: "TATA",
+    category: "Manufacturing",
+    style: "font-extrabold tracking-[0.1em]",
+  },
+  { name: "Amul", mark: "Amul", category: "Dairy", style: "font-extrabold tracking-normal" },
+  {
+    name: "Mother Dairy",
+    mark: "Mother Dairy",
+    category: "Dairy",
+    style: "font-semibold tracking-normal",
+  },
+  {
+    name: "Xylem",
+    mark: "xylem",
+    category: "Water technology",
+    style: "font-bold lowercase tracking-[0.02em]",
+  },
+  {
+    name: "Essar",
+    mark: "ESSAR",
+    category: "Steel & energy",
+    style: "font-bold tracking-[0.22em]",
+  },
+  {
+    name: "Zydex",
+    mark: "ZYDEX",
+    category: "Specialty chemicals",
+    style: "font-extrabold tracking-[0.06em]",
+  },
+  { name: "FAG", mark: "FAG", category: "Bearings", style: "font-extrabold tracking-[0.18em]" },
+  {
+    name: "Nikkiso Cosmodyne",
+    mark: "NIKKISO",
+    category: "Cryogenic systems",
+    style: "font-medium tracking-[0.22em]",
+  },
+  {
+    name: "LM Wind Power",
+    mark: "LM WIND",
+    category: "Renewables",
+    style: "font-semibold tracking-[0.12em]",
+  },
+  {
+    name: "Banco Products",
+    mark: "BANCO",
+    category: "Automotive",
+    style: "font-bold tracking-[0.16em]",
+  },
+  {
+    name: "Time Technoplast",
+    mark: "TIME",
+    category: "Polymer products",
+    style: "font-extrabold tracking-[0.1em]",
+  },
+  { name: "Claris", mark: "Claris", category: "Pharma", style: "font-semibold tracking-[0.04em]" },
+  { name: "DSM", mark: "DSM", category: "Materials", style: "font-extrabold tracking-[0.24em]" },
+  {
+    name: "Alleima",
+    mark: "alleima",
+    category: "Advanced materials",
+    style: "font-semibold lowercase tracking-[0.04em]",
+  },
+  {
+    name: "Bray",
+    mark: "BRAY",
+    category: "Flow control",
+    style: "font-extrabold tracking-[0.12em]",
+  },
+  {
+    name: "Kömmerling",
+    mark: "Kommerling",
+    category: "Materials",
+    style: "font-semibold tracking-normal",
+  },
+  {
+    name: "Lucas-TVS",
+    mark: "LUCAS-TVS",
+    category: "Automotive",
+    style: "font-bold tracking-[0.08em]",
+  },
+  {
+    name: "Cadila Pharmaceuticals",
+    mark: "CADILA",
+    category: "Pharma",
+    style: "font-semibold tracking-[0.18em]",
+  },
+  {
+    name: "Jyoti",
+    mark: "JYOTI",
+    category: "Engineering",
+    style: "font-extrabold tracking-[0.14em]",
+  },
+  {
+    name: "ITT",
+    mark: "ITT",
+    category: "Industrial products",
+    style: "font-extrabold tracking-[0.22em]",
+  },
+  {
+    name: "Chemco",
+    mark: "CHEMCO",
+    category: "Process industry",
+    style: "font-semibold tracking-[0.14em]",
+  },
+];

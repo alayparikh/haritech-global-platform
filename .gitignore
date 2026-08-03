@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Browser-automation output (console logs, snapshots, screenshots)
+.playwright-mcp/
+
+# Local agent settings — personal to each machine
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CapabilitiesRouteImport } from './routes/capabilities'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as IndustriesIndexRouteImport } from './routes/industries/index'
+import { Route as IndustriesSlugRouteImport } from './routes/industries/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CapabilitiesRoute = CapabilitiesRouteImport.update({
+  id: '/capabilities',
+  path: '/capabilities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/industries/',
+  path: '/industries/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/industries/$slug',
+  path: '/industries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/capabilities': typeof CapabilitiesRoute
+  '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/capabilities': typeof CapabilitiesRoute
+  '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries': typeof IndustriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/capabilities': typeof CapabilitiesRoute
+  '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/capabilities'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/industries/$slug'
+    | '/industries/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/capabilities'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/industries/$slug'
+    | '/industries'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/capabilities'
+    | '/contact'
+    | '/projects'
+    | '/services'
+    | '/industries/$slug'
+    | '/industries/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CapabilitiesRoute: typeof CapabilitiesRoute
+  ContactRoute: typeof ContactRoute
+  ProjectsRoute: typeof ProjectsRoute
+  ServicesRoute: typeof ServicesRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capabilities': {
+      id: '/capabilities'
+      path: '/capabilities'
+      fullPath: '/capabilities'
+      preLoaderRoute: typeof CapabilitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/industries'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/industries/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CapabilitiesRoute: CapabilitiesRoute,
+  ContactRoute: ContactRoute,
+  ProjectsRoute: ProjectsRoute,
+  ServicesRoute: ServicesRoute,
+  IndustriesSlugRoute: IndustriesSlugRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

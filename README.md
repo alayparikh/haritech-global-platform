@@ -1,20 +1,11 @@
 # HariTech Global Platform
 
-create me a modern website for "HariTech" their business is Engineering & Heavy Industries, Assembly Supply chain, Electronics Industries., Dairy Industries, Metal Industries, Renuable Industries. I have attached their logo so use those colors. Make it look premium, use modern but profesional designs and photos.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a6de8939-64d9-47bf-beef-dcee25f98832).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Modern industrial website for HariTech, covering Engineering & Heavy Industries,
+Assembly Supply Chain, Electronics, Dairy, Metal, and Renewable industries.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js and npm.
 
 ```sh
 git clone <this-repository-url>

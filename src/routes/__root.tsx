@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
 
 function NotFoundComponent() {
   return (
@@ -113,11 +116,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+/**
+ * Applies the stored theme before first paint. Without this the server always
+ * renders light and dark-mode visitors get a white flash on every cold load.
+ * Kept in sync with the storage key in use-theme.ts.
+ */
+const THEME_INIT = `(function(){try{var s=localStorage.getItem("haritech-theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;if(d)document.documentElement.classList.add("dark")}catch(e){}})()`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       </head>
       <body>
         {children}
@@ -127,13 +138,56 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Router scroll restoration doesn't resolve a hash that arrives with a
+ * cross-page navigation (e.g. /industries#sugar from /about), so do it here
+ * once the target route has mounted. `scroll-padding-top` in styles.css keeps
+ * the heading clear of the sticky header.
+ */
+function useHashScroll() {
+  const { pathname, hash } = useRouterState({ select: (s) => s.location });
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace(/^#/, "");
+    let frame = 0;
+    let attempts = 0;
+
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      // The section may not be painted yet on a cold navigation.
+      if (attempts++ < 20) frame = requestAnimationFrame(tryScroll);
+    };
+
+    frame = requestAnimationFrame(tryScroll);
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useHashScroll();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col bg-background">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-sm focus:bg-gradient-brand focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" className="flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }

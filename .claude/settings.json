@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk 'NR>=1124 && NR<=1220')",
+      "Bash(npx tsc *)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_take_screenshot"
+    ]
+  }
+}
