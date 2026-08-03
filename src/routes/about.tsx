@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Factory, Globe2 } from "lucide-react";
+import { ArrowRight, Factory, Globe2, Phone } from "lucide-react";
 
 import aboutImg from "@/assets/about-facility.jpg";
+import ventureImg from "@/assets/venture-flags.jpg";
 import { Container } from "@/components/site/Container";
 import { CTABand } from "@/components/site/CTABand";
 import { ClientWall } from "@/components/site/ClientLogos";
 import { PageHero } from "@/components/site/PageHero";
+import { Portrait } from "@/components/site/Portrait";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { SectionRail } from "@/components/site/SectionRail";
 import {
@@ -18,7 +20,7 @@ import {
 } from "@/components/site/primitives";
 import { clients } from "@/data/clients";
 import { familyBySlug } from "@/data/industries";
-import { company, principles } from "@/data/site";
+import { company, leadership, principles } from "@/data/site";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -37,6 +39,7 @@ export const Route = createFileRoute("/about")({
 const rail = [
   { id: "story", label: "Who we are" },
   { id: "venture", label: "Joint venture" },
+  { id: "leadership", label: "Leadership" },
   { id: "principles", label: "Principles" },
   { id: "clients", label: "Customers" },
 ];
@@ -128,8 +131,24 @@ function About() {
         </Container>
       </Section>
 
-      <Section id="venture" tone="ink" className="relative overflow-hidden">
-        <div className="absolute inset-0 brand-glow opacity-30 mix-blend-soft-light" />
+      <Section id="venture" tone="ink" className="relative isolate overflow-hidden">
+        {/* The two flags carry the joint venture faster than the copy does, so
+            they sit behind the section — heavily damped, since the section's
+            job is still to be readable. */}
+        <img
+          src={ventureImg}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width={1087}
+          height={650}
+          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
+        />
+        {/* Directional scrim: heaviest under the copy on the left, where white
+            type would otherwise land on the flag's white stripe, and thin on
+            the right so the flags stay legible as flags. */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
+        <div className="absolute inset-0 -z-10 bg-ink/25" />
         <Container className="relative">
           <SectionHeading
             tone="dark"
@@ -139,7 +158,10 @@ function About() {
           />
           <Reveal className={`${HEADING_GAP} grid gap-px bg-ink-foreground/10 md:grid-cols-2`}>
             {ventureSides.map((side) => (
-              <div key={side.place} className="group flex flex-col bg-ink p-8 md:p-10">
+              <div
+                key={side.place}
+                className="group flex flex-col bg-ink/85 p-8 backdrop-blur-md md:p-10"
+              >
                 <IconChip icon={side.icon} variant="outline-dark" />
                 <p className="eyebrow mt-6 text-cyan">{side.place}</p>
                 <h3 className="mt-3 font-display text-xl font-semibold text-ink-foreground">
@@ -149,6 +171,53 @@ function About() {
               </div>
             ))}
           </Reveal>
+        </Container>
+      </Section>
+
+      <Section id="leadership">
+        <Container>
+          <SectionHeading eyebrow="Leadership" title="Who you will actually be dealing with." />
+          <div className={`${HEADING_GAP} grid items-start gap-10 lg:grid-cols-12 lg:gap-14`}>
+            <div className="lg:col-span-4">
+              <Portrait name={leadership.name} className="mx-auto max-w-sm lg:mx-0" />
+            </div>
+
+            {/* Stops short of col 12: the fixed section rail sits over the
+                right edge of the container on xl. */}
+            <div className="lg:col-span-7 xl:col-span-6">
+              <h3 className="font-display text-3xl font-bold">{leadership.name}</h3>
+              <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+                <span className="font-semibold text-primary">{leadership.role}</span>
+                <span aria-hidden="true" className="text-border">
+                  |
+                </span>
+                <span>{leadership.location}</span>
+              </p>
+
+              <blockquote className="mt-8 border-l-2 border-primary/40 pl-6">
+                <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
+                  “{leadership.quote}”
+                </p>
+              </blockquote>
+
+              {leadership.bio.map((para) => (
+                <p key={para} className="mt-5 text-base leading-relaxed text-muted-foreground">
+                  {para}
+                </p>
+              ))}
+
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a href={leadership.phone.href} className={btn("outline")}>
+                  <Phone className="h-4 w-4" />
+                  {leadership.phone.display}
+                </a>
+                <Link to="/contact" className={btn("brand")}>
+                  Talk to engineering
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </Container>
       </Section>
 

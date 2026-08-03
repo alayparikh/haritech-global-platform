@@ -75,9 +75,7 @@ function Home() {
               <VentureBadge />
               <p className="inline-flex items-center gap-2.5 rounded-full border border-cyan/25 bg-cyan/10 px-4 py-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-cyan" />
-                <span className="eyebrow text-[0.65rem] text-cyan">
-                  22+ years · Vadodara, India
-                </span>
+                <span className="eyebrow text-[0.65rem] text-cyan">22+ years of experience</span>
               </p>
             </div>
             <h1 className="mt-7 text-hero font-bold text-ink-foreground">

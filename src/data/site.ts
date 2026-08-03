@@ -53,6 +53,23 @@ export const company = {
   capabilityStatement: "/haritech-capability-statement.txt",
 };
 
+/**
+ * Leadership. Photos are optional — see `public/images/team/README.md`; a
+ * person with no file renders as a monogram plate.
+ */
+export const leadership = {
+  name: "Tejas Patwa",
+  role: "Director",
+  location: "United States · India",
+  phone: { display: "+1 (404) 435-9548", href: "tel:+14044359548" },
+  quote:
+    "Every plant we walk into is already running. Our job is to leave it running better — measured, documented and handed back to your own people.",
+  bio: [
+    "Tejas leads HariTech across both sides of the joint venture: the US practice that sets specification and review standards, and the Vadodara operation that fabricates, installs and services the work.",
+    "He stays close to the technical side of a mandate rather than the sales side — scoping load, utilities, access and shutdown windows himself, so what gets quoted is what the floor actually needs.",
+  ],
+} as const;
+
 export const stats = [
   { value: "22+", label: "Years serving industry" },
   { value: "18", label: "Industries served" },
