@@ -30,17 +30,20 @@ import { clients } from "@/data/clients";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HariTech — Industrial Engineering Across 18 Industries, Vadodara" },
+      { title: "HariTech — Industrial Automation Systems Integrator, Vadodara" },
       {
         name: "description",
         content:
-          "HariTech Automations — a USA–India joint venture — engineers HVAC&R, piping, energy, water treatment, filtration and automation systems across 18 industries — 22+ years of field experience.",
+          "HariTech Automations — a USA–India joint venture — integrates PLC, SCADA, DCS, HMI and robotics across 18 industries — 22+ years of field experience.",
       },
-      { property: "og:title", content: "HariTech — Industrial Engineering, Vadodara" },
+      {
+        property: "og:title",
+        content: "HariTech — Industrial Automation Systems Integrator, Vadodara",
+      },
       {
         property: "og:description",
         content:
-          "Turnkey industrial engineering across 18 industries — HVAC&R, piping, energy, water treatment, automation and material handling.",
+          "PLC, SCADA, DCS, HMI and robotics integration across 18 industries — from control-panel build to commissioning and AMC support.",
       },
     ],
   }),
@@ -79,12 +82,12 @@ function Home() {
               </p>
             </div>
             <h1 className="mt-7 text-hero font-bold text-ink-foreground">
-              Industrial systems engineered for the long shift.
+              Automation systems integrated for the long shift.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted">
-              HariTech designs, builds and maintains production infrastructure across 18 industries
-              — from heavy engineering and metals to pharma, petrochemical, solar and water
-              treatment — with a single team accountable from drawing to commissioning.
+              HariTech integrates PLC, SCADA, DCS, HMI and robotics across 18 industries — from
+              heavy engineering and metals to pharma, petrochemical, solar and water treatment —
+              with a single team accountable from control philosophy to commissioning.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link to="/contact" className={btn("brand", "lg")}>
@@ -108,8 +111,8 @@ function Home() {
         <Container>
           <SectionHeading
             eyebrow="Industries we power"
-            title="Eighteen industries. One engineering standard."
-            lede="Every mandate is scoped by engineers who have run the floor — so specifications survive contact with real production conditions."
+            title="Eighteen industries. One integration standard."
+            lede="Every mandate is scoped by engineers who understand control systems — so control philosophy survives contact with real production conditions."
             action={
               <Link to="/industries" className={btn("outline")}>
                 View all industries
@@ -177,8 +180,8 @@ function Home() {
         <Container>
           <SectionHeading
             eyebrow="Services & solutions"
-            title="Everything the plant needs, under one contract."
-            lede="Manufacturer, supplier, service and solution provider for utility and process systems — delivered as standard packages or fully customised engineering projects."
+            title="Everything the control system needs, under one contract."
+            lede="Systems integrator for PLC, SCADA, DCS, HMI and robotics — delivered as standard packages or fully customised integration projects."
             action={
               <Link to="/services" className={btn("outline")}>
                 All {services.length} services
@@ -256,7 +259,7 @@ function Home() {
               <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-lift">
                 <img
                   src={aboutImg}
-                  alt="Technicians assembling precision machinery on a production line"
+                  alt="Engineers programming a control panel on a production line"
                   loading="lazy"
                   width={1200}
                   height={900}
@@ -266,21 +269,21 @@ function Home() {
               <div className="absolute bottom-0 right-6 rounded-sm bg-gradient-brand p-7 text-primary-foreground shadow-lift sm:right-8 lg:-bottom-8">
                 <p className="font-display text-4xl font-bold">22+</p>
                 <p className="mt-1 text-xs uppercase tracking-[0.18em] opacity-90">
-                  Years on the floor
+                  Years in automation
                 </p>
               </div>
             </div>
             <div>
               <SectionHeading
                 eyebrow="Who we are"
-                title="An engineering partner, not a vendor."
-                lede="HariTech is a manufacturer and service provider for HVAC&R systems, piping projects, energy projects, water treatment, structural work, ventilation, filtration, automation and material handling — backed by a team with more than 22 years of experience."
+                title="A systems integrator, not a vendor."
+                lede="HariTech is a systems integrator for PLC, SCADA, DCS, HMI, robotics and control-panel automation — backed by a team with more than 22 years of experience."
               />
               <ul className="mt-8 space-y-4">
                 {[
-                  "In-house design, fabrication and automation teams",
-                  "Qualified sourcing across Indian and overseas markets",
-                  "Lifecycle service contracts with guaranteed response",
+                  "In-house control engineering and panel-build teams",
+                  "Platform-agnostic across major PLC and SCADA vendors",
+                  "Lifecycle AMC contracts with guaranteed response",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm">
                     <span className="mt-1.5 h-2 w-2 flex-none rounded-full bg-gradient-brand" />
@@ -302,8 +305,8 @@ function Home() {
         <Container>
           <SectionHeading
             eyebrow="Esteemed customers"
-            title="Trusted on demanding floors."
-            lede="A partial list of the organisations whose plants, utilities and process lines we have engineered, supplied or serviced."
+            title="Trusted on demanding control systems."
+            lede="A partial list of the organisations whose plants, lines and process systems we have automated, integrated or serviced."
             action={
               <Link to="/about" hash="clients" className={btn("outline")}>
                 See the full list

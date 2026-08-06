@@ -16,7 +16,7 @@ export const Route = createFileRoute("/capabilities")({
       {
         name: "description",
         content:
-          "Concept to commissioning, uptime engineering, compliance by design and multi-sector sourcing — plus HariTech's four-stage delivery route from assessment to lifecycle support.",
+          "Concept to commissioning, platform-agnostic integration, compliance by design and multi-sector experience — plus HariTech's four-stage delivery route from assessment to lifecycle support.",
       },
     ],
   }),
@@ -35,8 +35,8 @@ function Capabilities() {
     <>
       <PageHero
         eyebrow="Capabilities"
-        title="Built around throughput, not deliverables."
-        lede="We measure our work the way your plant does: cycle time, yield, downtime and total cost of ownership over the asset's life."
+        title="Built around uptime, not deliverables."
+        lede="We measure our work the way your plant does: cycle time, availability, downtime and total cost of ownership over the control system's life."
         image="/images/families/mobility-electronics.jpg"
         fallbackImage={familyBySlug["mobility-electronics"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Capabilities" }]}
@@ -122,7 +122,7 @@ function Capabilities() {
           <SectionHeading
             eyebrow="Engineering notes"
             title="Things we keep having to explain."
-            lede="Short reads on maintenance, clean-room utilities and energy-saving retrofits — written by the engineers who ran into the problem."
+            lede="Short reads on control-system migration, SCADA visibility and obsolescence planning — written by the engineers who ran into the problem."
           />
           <ul
             className={`${HEADING_GAP} grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2`}

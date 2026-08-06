@@ -1,6 +1,7 @@
 import {
   BadgeCheck,
   Building2,
+  Cpu,
   ClipboardCheck,
   Eye,
   FileText,
@@ -8,9 +9,10 @@ import {
   Globe2,
   Layers,
   Mail,
+  MonitorCog,
   Newspaper,
-  PackageCheck,
-  Ruler,
+  PanelsTopLeft,
+  RefreshCw,
   ShieldCheck,
   Target,
   Workflow,
@@ -63,40 +65,40 @@ export const leadership = {
   location: "United States · India",
   phone: { display: "+91 98257 43029", href: "tel:+91 98257 43029" },
   quote:
-    "Every plant we walk into is already running. Our job is to leave it running better — measured, documented and handed back to your own people.",
+    "Every plant we walk into already has controllers running. Our job is to leave it better integrated — documented, monitored and handed back to your own people.",
   bio: [
-    "I lead HariTech across both sides of the joint venture: the US practice that sets specification and review standards, and the Vadodara operation that fabricates, installs and services the work.",
-    "He stays close to the technical side of a mandate rather than the sales side — scoping load, utilities, access and shutdown windows himself, so what gets quoted is what the floor actually needs.",
+    "I lead HariTech across both sides of the joint venture: the US practice that sets specification and review standards, and the Vadodara operation that programs, builds and services the automation.",
+    "He stays close to the technical side of a mandate rather than the sales side — scoping controllers, networks and shutdown windows himself, so what gets quoted is what the plant actually needs.",
   ],
 } as const;
 
 export const stats = [
   { value: "22+", label: "Years serving industry" },
   { value: "18", label: "Industries served" },
-  { value: "400+", label: "Projects commissioned" },
-  { value: "99.2%", label: "Delivered uptime target" },
+  { value: "400+", label: "Control systems commissioned" },
+  { value: "99.2%", label: "System availability target" },
 ];
 
 export const capabilities = [
   {
     icon: Workflow,
     title: "Concept to commissioning",
-    copy: "One accountable team from feasibility studies and design through installation, validation and handover.",
+    copy: "One accountable team from control philosophy and design through panel build, programming and site commissioning.",
   },
   {
     icon: Gauge,
-    title: "Uptime engineering",
-    copy: "Preventive maintenance regimes, spares strategy and condition monitoring designed around your OEE targets.",
+    title: "Platform-agnostic integration",
+    copy: "PLC, SCADA, DCS and HMI work across Siemens, Allen-Bradley, Schneider and Mitsubishi — we integrate what you already run.",
   },
   {
     icon: ShieldCheck,
     title: "Compliance by design",
-    copy: "Safety, food-grade and electrical standards embedded into drawings, not retrofitted after inspection.",
+    copy: "Safety, hazardous-area and industry-specific standards embedded into control philosophy, not retrofitted after inspection.",
   },
   {
     icon: Globe2,
-    title: "Multi-sector sourcing",
-    copy: "A qualified supplier network spanning metals, electronics and process equipment across India and overseas.",
+    title: "Multi-sector integration",
+    copy: "Automation experience spanning metals, process, food & life sciences, mobility and utilities across India and overseas mandates.",
   },
 ];
 
@@ -104,45 +106,45 @@ export const processSteps = [
   {
     n: "01",
     t: "Assess",
-    d: "Site survey, load studies and constraint mapping before a single line is drawn.",
+    d: "Control audit, obsolescence review and constraint mapping before a line of logic is written.",
   },
   {
     n: "02",
     t: "Engineer",
-    d: "Detailed design, simulation and costed BOM with alternatives you can actually compare.",
+    d: "Control philosophy, panel design and PLC/SCADA architecture with alternatives you can actually compare.",
   },
   {
     n: "03",
     t: "Build",
-    d: "Fabrication, assembly and factory acceptance testing under our own quality regime.",
+    d: "Panel build, programming and factory acceptance testing under our own quality regime.",
   },
   {
     n: "04",
     t: "Sustain",
-    d: "Commissioning, operator training and long-term maintenance with measured KPIs.",
+    d: "Commissioning, operator training and long-term AMC with measured uptime KPIs.",
   },
 ];
 
 export const deliveryTracks = [
   {
-    icon: Ruler,
+    icon: MonitorCog,
     title: "Design",
-    copy: "Plant surveys, load calculations, layouts, BOQs and execution drawings.",
+    copy: "Control audits, I/O schedules, control philosophy and panel schematics.",
   },
   {
-    icon: PackageCheck,
-    title: "Products",
-    copy: "HVAC&R packages, filters, piping assemblies, panels, conveyors and utility equipment.",
+    icon: PanelsTopLeft,
+    title: "Panels",
+    copy: "IEC 61439 control panels, PLC racks, HMI stations and safety-rated enclosures.",
   },
   {
-    icon: Wrench,
-    title: "Solutions",
-    copy: "Custom engineering for water, air, energy, clean rooms and production support systems.",
+    icon: Cpu,
+    title: "Integration",
+    copy: "PLC, SCADA, DCS, robotics and industrial networking engineered around your existing systems.",
   },
   {
-    icon: ClipboardCheck,
-    title: "Executions",
-    copy: "Fabrication, installation, commissioning, handover and lifecycle service.",
+    icon: RefreshCw,
+    title: "Sustain",
+    copy: "Commissioning, migration, handover and AMC support with lifecycle service.",
   },
 ];
 
@@ -150,17 +152,17 @@ export const principles = [
   {
     icon: Target,
     title: "Mission",
-    copy: "A lean, cost-efficient service organisation built on product reliability — surpassing customer expectations of quality and delivery through sustainable processes and an empowered team.",
+    copy: "A lean, cost-efficient systems integrator built on control-system reliability — surpassing customer expectations of quality and delivery through sustainable engineering processes and an empowered team.",
   },
   {
     icon: Eye,
     title: "Vision",
-    copy: "To be a customer-oriented, environment-friendly benchmark for power-train service, execution and solution delivery.",
+    copy: "To be a customer-oriented benchmark for industrial automation integration, execution and lifecycle support.",
   },
   {
     icon: BadgeCheck,
     title: "Quality policy",
-    copy: "Continual improvement of a well-defined quality management system, innovative process approaches, and recognition worldwide for premium quality, reliability and durability.",
+    copy: "Continual improvement of a well-defined quality management system, platform-agnostic integration approaches, and recognition for premium reliability and documentation standards.",
   },
 ];
 
@@ -176,22 +178,22 @@ export const resources = [
   {
     icon: Newspaper,
     title: "Engineering notes",
-    copy: "Short reads on maintenance, clean-room utilities and energy-saving retrofits.",
+    copy: "Short reads on control-system migration, SCADA visibility and obsolescence planning.",
     href: "/capabilities#notes",
     label: "View notes",
   },
   {
-    icon: PackageCheck,
-    title: "Product catalogue",
-    copy: "Core categories for HVAC, filtration, piping, automation and material handling.",
+    icon: MonitorCog,
+    title: "Solutions catalogue",
+    copy: "Core categories for PLC, SCADA, DCS, robotics and control-panel integration.",
     href: "/services",
     label: "Explore",
   },
 ];
 
 export const engineeringNotes = [
-  "Sizing exhaust for the worst hour of the shift, not the average",
-  "Why clean-room recovery time matters more than particle count",
-  "Cooling tower approach temperature as an early failure signal",
-  "Compressed air leaks: the cheapest energy project on any site",
+  "Why an obsolescence audit should happen before the controller fails, not after",
+  "SCADA alarm floods: fixing the alarm philosophy, not just the tag count",
+  "What actually breaks when a PLC migration is rushed",
+  "Network segmentation as the cheapest cybersecurity project on any plant floor",
 ];

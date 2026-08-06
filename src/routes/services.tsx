@@ -19,11 +19,11 @@ import { services } from "@/data/services";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services & Solutions — HVAC, Piping, Water, Automation | HariTech" },
+      { title: "Services & Solutions — PLC, SCADA, DCS, Robotics | HariTech" },
       {
         name: "description",
         content:
-          "Twelve engineering packages: HVAC&R, water treatment, exhaust ventilation, filtration, piping, energy projects, automation, material handling, humidity control, structural work, AMC and clean rooms.",
+          "Twelve integration packages: PLC programming, SCADA & HMI, DCS integration, robotics & motion control, control panels, instrumentation, industrial networking, MES data, migration, FAT/SAT, safety systems and AMC support.",
       },
     ],
   }),
@@ -35,8 +35,8 @@ function Services() {
     <>
       <PageHero
         eyebrow={`${services.length} service packages`}
-        title="Everything the plant needs, under one contract."
-        lede="Manufacturer, supplier, service and solution provider for utility and process systems — delivered as standard packages or fully customised engineering projects."
+        title="Everything the control system needs, under one contract."
+        lede="Systems integrator for PLC, SCADA, DCS, HMI and robotics — delivered as standard packages or fully customised integration projects."
         image="/images/families/process-chemical.jpg"
         fallbackImage={familyBySlug["process-chemical"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Services" }]}

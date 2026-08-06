@@ -25,7 +25,7 @@ export const Route = createFileRoute("/projects")({
       {
         name: "description",
         content:
-          "Proof points across design, products and execution — HVAC retrofits, hygienic piping and energy balance-of-plant work delivered by HariTech.",
+          "Proof points across design, panels and integration — PLC/SCADA migrations, batch automation and SCADA monitoring work delivered by HariTech.",
       },
     ],
   }),
@@ -37,8 +37,8 @@ function Projects() {
     <>
       <PageHero
         eyebrow="Projects"
-        title="Proof points across design, products and execution."
-        lede="A selection of the work behind the capability statement — what was scoped, what was built and what changed on the floor afterwards."
+        title="Proof points across design, panels and integration."
+        lede="A selection of the work behind the capability statement — what was scoped, what was built and what changed on the control system afterwards."
         image="/images/families/heavy-engineering-metals.jpg"
         fallbackImage={familyBySlug["heavy-engineering-metals"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Projects" }]}

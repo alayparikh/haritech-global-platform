@@ -25,11 +25,11 @@ import { company, leadership, principles } from "@/data/site";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About HariTech — Engineering Partner, Not a Vendor" },
+      { title: "About HariTech — Systems Integrator, Not a Vendor" },
       {
         name: "description",
         content:
-          "HariTech Automations, Vadodara: a USA–India joint venture, 22+ years engineering HVAC&R, piping, energy, water treatment, structural, ventilation, filtration, automation and material handling systems.",
+          "HariTech Automations, Vadodara: a USA–India joint venture, 22+ years integrating PLC, SCADA, DCS, HMI, robotics and control-panel automation systems.",
       },
     ],
   }),
@@ -55,8 +55,8 @@ const ventureSides = [
   {
     icon: Factory,
     place: "India · Vadodara",
-    title: "Manufacturing and execution",
-    copy: "In-house fabrication, automation and a service team on the ground — sourcing, building and commissioning without a middle layer.",
+    title: "Integration and execution",
+    copy: "In-house panel build, programming and a service team on the ground — engineering, integrating and commissioning without a middle layer.",
   },
 ];
 
@@ -65,8 +65,8 @@ function About() {
     <>
       <PageHero
         eyebrow="Who we are"
-        title="An engineering partner, not a vendor."
-        lede="A USA–India joint venture with twenty-two years of building, commissioning and maintaining industrial utility systems — the same team on site until output is stable and your people can run it without us."
+        title="A systems integrator, not a vendor."
+        lede="A USA–India joint venture with twenty-two years of integrating, commissioning and maintaining industrial control systems — the same team on site until the system is stable and your people can run it without us."
         image="/images/families/food-dairy-lifesciences.jpg"
         fallbackImage={familyBySlug["food-dairy-lifesciences"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "About" }]}
@@ -82,7 +82,7 @@ function About() {
               <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-lift">
                 <img
                   src={aboutImg}
-                  alt="Technicians assembling precision machinery on a production line"
+                  alt="Engineers programming a control panel on a production line"
                   loading="lazy"
                   width={1200}
                   height={900}
@@ -92,7 +92,7 @@ function About() {
               <div className="absolute bottom-0 right-6 rounded-sm bg-gradient-brand p-7 text-primary-foreground shadow-lift sm:right-8 lg:-bottom-8">
                 <p className="font-display text-4xl font-bold">22+</p>
                 <p className="mt-1 text-xs uppercase tracking-[0.18em] opacity-90">
-                  Years on the floor
+                  Years in automation
                 </p>
               </div>
             </div>
@@ -101,20 +101,20 @@ function About() {
               <SectionHeading
                 eyebrow="The company"
                 title="Haritech Automations Pvt. Ltd."
-                lede="HariTech is a manufacturer and service provider for HVAC&R systems, piping projects (gas, water, air and fire lines), energy projects, water treatment, structural work, ventilation, filtration, automation and material handling — backed by a team with more than 22 years of experience."
+                lede="HariTech is a systems integrator for PLC, SCADA, DCS, HMI, robotics and control-panel automation — backed by a team with more than 22 years of experience."
               />
               <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Our range is built to industry quality standards, with sturdy construction and
-                energy efficiency tuned to each client's need. From a single retrofit to a
-                greenfield line, our teams stay on site until output is stable and your people can
-                run it without us.
+                Our integration work is built to industry standards, platform-agnostic across
+                major PLC and SCADA vendors, and tuned to each client's existing systems. From a
+                single controller migration to a greenfield line, our teams stay on site until the
+                system is stable and your people can run it without us.
               </p>
               <ul className="mt-8 space-y-4">
                 {[
-                  "In-house design, fabrication and automation teams",
-                  "Qualified sourcing across Indian and overseas markets",
-                  "Lifecycle service contracts with guaranteed response",
-                  "Engineers who have run production, not just specified it",
+                  "In-house control engineering and panel-build teams",
+                  "Platform-agnostic across major PLC and SCADA vendors",
+                  "Lifecycle AMC contracts with guaranteed response",
+                  "Engineers who understand production, not just logic diagrams",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm">
                     <span className="mt-1.5 h-2 w-2 flex-none rounded-full bg-gradient-brand" />
@@ -261,8 +261,8 @@ function About() {
         <Container>
           <SectionHeading
             eyebrow="Esteemed customers"
-            title="Trusted on demanding floors."
-            lede="A partial list of the organisations whose plants, utilities and process lines we have engineered, supplied or serviced."
+            title="Trusted on demanding control systems."
+            lede="A partial list of the organisations whose plants, lines and process systems we have automated, integrated or serviced."
           />
           <ClientWall clients={clients} className={HEADING_GAP} />
         </Container>
