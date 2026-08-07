@@ -31,6 +31,7 @@ import electronicsImg from "@/assets/sector-electronics.jpg";
 import dairyImg from "@/assets/sector-dairy.jpg";
 import metalImg from "@/assets/sector-metal.jpg";
 import renewableImg from "@/assets/sector-renewable.jpg";
+import heroImg from "@/assets/hero-industry.jpg";
 
 export type FamilySlug =
   | "heavy-engineering-metals"
@@ -81,7 +82,7 @@ export const families: Family[] = [
     blurb:
       "DCS, safety instrumented systems and classified-area automation for reactive and hazardous process streams.",
     image: "/images/families/process-chemical.jpg",
-    fallbackImage: metalImg,
+    fallbackImage: heroImg,
     icon: Beaker,
   },
   {

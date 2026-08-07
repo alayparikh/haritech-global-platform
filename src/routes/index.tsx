@@ -127,7 +127,7 @@ function Home() {
                 family={family}
                 index={i}
                 count={industriesByFamily(family.slug).length}
-                wide={i === 0 || i === 3 || i === 5}
+                wide={i === 0 || i === 3 || i === 4}
               />
             ))}
           </Reveal>
