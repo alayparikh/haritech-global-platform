@@ -61,7 +61,7 @@ export const company = {
  */
 export const leadership = {
   name: "Dipak Rathod",
-  role: "XYZ",
+  role: "Director",
   location: "United States · India",
   phone: { display: "+91 98257 43029", href: "tel:+91 98257 43029" },
   quote:

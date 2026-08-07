@@ -5,7 +5,7 @@ import aboutImg from "@/assets/about-facility.jpg";
 import ventureImg from "@/assets/venture-flags.jpg";
 import { Container } from "@/components/site/Container";
 import { CTABand } from "@/components/site/CTABand";
-import { ClientWall } from "@/components/site/ClientLogos";
+import { ClientMarqueeWall } from "@/components/site/ClientLogos";
 import { PageHero } from "@/components/site/PageHero";
 import { Portrait } from "@/components/site/Portrait";
 import { SectionHeading } from "@/components/site/SectionHeading";
@@ -264,7 +264,7 @@ function About() {
             title="Trusted on demanding control systems."
             lede="A partial list of the organisations whose plants, lines and process systems we have automated, integrated or serviced."
           />
-          <ClientWall clients={clients} className={HEADING_GAP} />
+          <ClientMarqueeWall clients={clients} className={HEADING_GAP} />
         </Container>
       </Section>
 

@@ -31,8 +31,10 @@ const logoFor = (name: string) => {
 
 /**
  * One client, sized to a fixed box so a wordmark and a logo file sit on the
- * same optical baseline. Desaturated at rest so 30-odd marks read as one
- * texture rather than a ransom note; full colour on hover.
+ * same optical baseline. Logos render in full colour on a white card — many
+ * source files carry their own solid brand-colour background, which reads as
+ * a muddy block under a grayscale filter, so we let the mark's own colour do
+ * the work instead of desaturating it.
  */
 function ClientPlate({ client, tone }: { client: Client; tone: "light" | "ink" }) {
   const logo = logoFor(client.name);
@@ -41,7 +43,7 @@ function ClientPlate({ client, tone }: { client: Client; tone: "light" | "ink" }
     <div
       title={`${client.name} — ${client.category}`}
       className={cn(
-        "group flex h-20 items-center justify-center px-5",
+        "group flex h-24 items-center justify-center px-6",
         tone === "ink" ? "text-ink-muted" : "text-muted-foreground",
       )}
     >
@@ -50,11 +52,7 @@ function ClientPlate({ client, tone }: { client: Client; tone: "light" | "ink" }
           src={logo}
           alt={client.name}
           loading="lazy"
-          className={cn(
-            "max-h-9 w-auto max-w-full object-contain opacity-70 grayscale transition duration-300",
-            "group-hover:opacity-100 group-hover:grayscale-0",
-            tone === "ink" && "brightness-0 invert group-hover:brightness-100 group-hover:invert-0",
-          )}
+          className="max-h-12 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
         />
       ) : (
         <span
@@ -72,59 +70,91 @@ function ClientPlate({ client, tone }: { client: Client; tone: "light" | "ink" }
 }
 
 /**
- * Full customer list. An auto-fit grid rather than a fixed column count, so 33
- * names land in six or seven short rows instead of the nine-row wall of text
- * the section used to be.
+ * One continuously scrolling row. The track is duplicated so the loop is
+ * seamless; `aria-hidden` on the copy keeps screen readers from announcing
+ * every client twice. Reduced-motion users get a static, wrapped row instead
+ * — see `marquee` / `marquee-reverse` in styles.css.
  */
-export function ClientWall({ clients, className }: { clients: Client[]; className?: string }) {
-  return (
-    <ul
-      className={cn(
-        "grid grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))] gap-px overflow-hidden rounded-sm border border-border bg-border",
-        className,
-      )}
-    >
-      {clients.map((c) => (
-        <li key={c.name} className="bg-card transition-colors duration-300 hover:bg-secondary/60">
-          <ClientPlate client={c} tone="light" />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/**
- * Teaser strip: one continuously scrolling row. The track is duplicated so the
- * loop is seamless; `aria-hidden` on the copy keeps screen readers from
- * announcing every client twice. Reduced-motion users get a static, wrapped
- * grid instead — see `marquee` in styles.css.
- */
-export function ClientStrip({ clients, className }: { clients: Client[]; className?: string }) {
+function ClientMarqueeRow({
+  clients,
+  reverse,
+  durationSeconds,
+}: {
+  clients: Client[];
+  reverse?: boolean;
+  durationSeconds?: number;
+}) {
   return (
     <div
-      className={cn(
-        "relative overflow-hidden",
-        // Fades both ends so the row reads as continuing past the viewport
-        // rather than being cut off.
-        "[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]",
-        className,
-      )}
+      className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
     >
-      <div className="marquee flex w-max items-center gap-px">
+      <div
+        className={cn("flex w-max items-center gap-4", reverse ? "marquee-reverse" : "marquee")}
+        style={durationSeconds ? { animationDuration: `${durationSeconds}s` } : undefined}
+      >
         {[0, 1].map((copy) => (
           <ul
             key={copy}
             aria-hidden={copy === 1 ? "true" : undefined}
-            className="flex items-center gap-px"
+            className="flex items-center gap-4"
           >
             {clients.map((c) => (
-              <li key={`${copy}-${c.name}`} className="w-44 flex-none bg-card">
+              <li
+                key={`${copy}-${c.name}`}
+                className="w-44 flex-none overflow-hidden rounded-md border border-border bg-card shadow-sm"
+              >
                 <ClientPlate client={c} tone="light" />
               </li>
             ))}
           </ul>
         ))}
       </div>
+    </div>
+  );
+}
+
+/** Splits a list into `rows` roughly-even, contiguous chunks. */
+const chunk = <T,>(items: T[], rows: number): T[][] => {
+  const size = Math.ceil(items.length / rows);
+  return Array.from({ length: rows }, (_, i) => items.slice(i * size, i * size + size)).filter(
+    (part) => part.length > 0,
+  );
+};
+
+/**
+ * Teaser strip: a single scrolling row, used where space is tight (e.g. the
+ * homepage clients section).
+ */
+export function ClientStrip({ clients, className }: { clients: Client[]; className?: string }) {
+  return (
+    <div className={className}>
+      <ClientMarqueeRow clients={clients} />
+    </div>
+  );
+}
+
+/**
+ * Full customer list as several scrolling rows moving in alternating
+ * directions at slightly different speeds. Never puts all 49-odd logos on
+ * screen at once — each row's own scroll pace keeps mismatched logo
+ * backgrounds from reading as one flat, cluttered wall.
+ */
+export function ClientMarqueeWall({
+  clients,
+  rows = 3,
+  className,
+}: {
+  clients: Client[];
+  rows?: number;
+  className?: string;
+}) {
+  const parts = chunk(clients, rows);
+
+  return (
+    <div className={cn("space-y-4", className)}>
+      {parts.map((row, i) => (
+        <ClientMarqueeRow key={i} clients={row} reverse={i % 2 === 1} durationSeconds={50 + i * 12} />
+      ))}
     </div>
   );
 }
