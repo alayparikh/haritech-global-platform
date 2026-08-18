@@ -195,46 +195,53 @@ function About() {
       <Section id="leadership">
         <Container>
           <SectionHeading eyebrow="Leadership" title="Who you will actually be dealing with." />
-          <div className={`${HEADING_GAP} grid items-start gap-10 lg:grid-cols-12 lg:gap-14`}>
-            <div className="lg:col-span-4">
-              <Portrait name={leadership.name} className="mx-auto max-w-sm lg:mx-0" />
-            </div>
+          <div className={`${HEADING_GAP} space-y-16`}>
+            {leadership.map((person) => (
+              <div
+                key={person.name}
+                className="grid items-start gap-10 border-t border-border pt-12 first:border-t-0 first:pt-0 lg:grid-cols-12 lg:gap-14"
+              >
+                <div className="lg:col-span-4">
+                  <Portrait name={person.name} className="mx-auto max-w-sm lg:mx-0" />
+                </div>
 
-            {/* Stops short of col 12 to keep the measure readable — a full
-                eight columns runs past 110 characters a line. */}
-            <div className="lg:col-span-7 xl:col-span-6">
-              <h3 className="font-display text-3xl font-bold">{leadership.name}</h3>
-              <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-                <span className="font-semibold text-primary">{leadership.role}</span>
-                <span aria-hidden="true" className="text-border">
-                  |
-                </span>
-                <span>{leadership.location}</span>
-              </p>
+                {/* Stops short of col 12 to keep the measure readable — a full
+                    eight columns runs past 110 characters a line. */}
+                <div className="lg:col-span-7 xl:col-span-6">
+                  <h3 className="font-display text-3xl font-bold">{person.name}</h3>
+                  <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+                    <span className="font-semibold text-primary">{person.role}</span>
+                    <span aria-hidden="true" className="text-border">
+                      |
+                    </span>
+                    <span>{person.location}</span>
+                  </p>
 
-              <blockquote className="mt-8 border-l-2 border-primary/40 pl-6">
-                <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
-                  “{leadership.quote}”
-                </p>
-              </blockquote>
+                  <blockquote className="mt-8 border-l-2 border-primary/40 pl-6">
+                    <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
+                      “{person.quote}”
+                    </p>
+                  </blockquote>
 
-              {leadership.bio.map((para) => (
-                <p key={para} className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  {para}
-                </p>
-              ))}
+                  {person.bio.map((para) => (
+                    <p key={para} className="mt-5 text-base leading-relaxed text-muted-foreground">
+                      {para}
+                    </p>
+                  ))}
 
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a href={leadership.phone.href} className={btn("outline")}>
-                  <Phone className="h-4 w-4" />
-                  {leadership.phone.display}
-                </a>
-                <Link to="/contact" className={btn("brand")}>
-                  Talk to engineering
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                  <div className="mt-9 flex flex-wrap gap-3">
+                    <a href={person.phone.href} className={btn("outline")}>
+                      <Phone className="h-4 w-4" />
+                      {person.phone.display}
+                    </a>
+                    <Link to="/contact" className={btn("brand")}>
+                      Talk to engineering
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </Container>
       </Section>

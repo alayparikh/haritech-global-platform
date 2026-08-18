@@ -56,21 +56,46 @@ export const company = {
 };
 
 /**
- * Leadership. Photos are optional — see `public/images/team/README.md`; a
- * person with no file renders as a monogram plate.
+ * Radiant Control Systems — a separate US-based entity, not a HariTech
+ * branch office. Listed on Contact as its own company, not paired with the
+ * India address.
  */
-export const leadership = {
-  name: "Dipak Rathod",
-  role: "Director",
-  location: "United States · India",
-  phone: { display: "+91 98257 43029", href: "tel:+91 98257 43029" },
-  quote:
-    "Every plant we walk into already has controllers running. Our job is to leave it better integrated — documented, monitored and handed back to your own people.",
-  bio: [
-    "I lead HariTech across both sides of the joint venture: the US practice that sets specification and review standards, and the Vadodara operation that programs, builds and services the automation.",
-    "He stays close to the technical side of a mandate rather than the sales side — scoping controllers, networks and shutdown windows himself, so what gets quoted is what the plant actually needs.",
-  ],
-} as const;
+export const radiantControl = {
+  name: "Radiant Control Systems",
+  website: "https://radiantcontrolsystems.com/",
+  emails: ["info@radiantcontrolsystems.com"],
+  phones: [{ display: "+1 (470) 915-0965", href: "tel:+14709150965" }],
+  address: ["6340 Sugarloaf Parkway, Suite # 200", "Duluth, GA 30097"],
+  mapEmbed:
+    "https://www.google.com/maps?q=6340+Sugarloaf+Parkway+Suite+200+Duluth+GA+30097&output=embed",
+};
+
+export const leadership = [
+  {
+    name: "Dipak Rathod",
+    role: "Director",
+    location: "Vadodara · Gujarat · India",
+    phone: { display: "+91 98257 43029", href: "tel:+91 98257 43029" },
+    quote:
+      "Every plant we walk into already has controllers running. Our job is to leave it better integrated — documented, monitored and handed back to your own people.",
+    bio: [
+      "I lead HariTech across both sides of the joint venture: the US practice that sets specification and review standards, and the Vadodara operation that programs, builds and services the automation.",
+      "He stays close to the technical side of a mandate rather than the sales side — scoping controllers, networks and shutdown windows himself, so what gets quoted is what the plant actually needs.",
+    ],
+  },
+  {
+    name: "Tejas Patwa",
+    role: "Director",
+    location: "Atlanta · Georgia · United States",
+    phone: { display: "+1 (470) 915-0965", href: "tel:+14709150965" },
+    quote:
+      "A control system that only works in the country it was designed in isn't finished. We hold every spec to the same bar whether it ships from Georgia or Vadodara.",
+    bio: [
+      "I founded Radiant Control Systems to bring the same engineering discipline to plants here in the US that HariTech delivers in India — the two teams review each other's work rather than just handing off a spec sheet.",
+      "My focus stays on the engineering side of a mandate: control philosophy, panel standards and the acceptance testing that decides whether a system survives its first real shutdown.",
+    ],
+  },
+] as const;
 
 export const stats = [
   { value: "22+", label: "Years serving industry" },

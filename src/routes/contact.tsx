@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Download, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Download, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import {
   Select,
@@ -22,7 +22,7 @@ import {
 } from "@/components/site/primitives";
 import { familyBySlug, industries } from "@/data/industries";
 import { services } from "@/data/services";
-import { company, resources } from "@/data/site";
+import { company, radiantControl, resources } from "@/data/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -105,45 +105,69 @@ function Contact() {
             <div className="lg:col-span-5">
               <SectionHeading eyebrow="Reach us" title="Direct lines to the team." />
 
-              <div className="mt-10 space-y-6 text-sm">
-                <div className="flex items-start gap-4">
-                  <IconChip icon={Mail} variant="outline" />
-                  <span className="pt-2">
-                    {company.emails.map((e) => (
-                      <a
-                        key={e}
-                        href={`mailto:${e}`}
-                        className="block text-foreground hover:text-primary"
-                      >
-                        {e}
-                      </a>
-                    ))}
-                  </span>
+              <div className="mt-10 space-y-8 text-sm">
+                <div className="space-y-6">
+                  <p className="eyebrow text-muted-foreground/70">India office</p>
+                  <div className="flex items-start gap-4">
+                    <IconChip icon={Mail} variant="outline" />
+                    <span className="pt-2">
+                      {company.emails.map((e) => (
+                        <a
+                          key={e}
+                          href={`mailto:${e}`}
+                          className="block text-foreground hover:text-primary"
+                        >
+                          {e}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <IconChip icon={Phone} variant="outline" />
+                    <span className="pt-2">
+                      {company.phones.map((p) => (
+                        <a
+                          key={p.href}
+                          href={p.href}
+                          className="block text-foreground hover:text-primary"
+                        >
+                          {p.display}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <IconChip icon={Phone} variant="outline" />
-                  <span className="pt-2">
-                    {company.phones.map((p) => (
-                      <a
-                        key={p.href}
-                        href={p.href}
-                        className="block text-foreground hover:text-primary"
-                      >
-                        {p.display}
-                      </a>
-                    ))}
-                  </span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <IconChip icon={MapPin} variant="outline" />
-                  <address className="pt-2 not-italic leading-relaxed text-muted-foreground">
-                    <span className="block font-semibold text-foreground">{company.name}</span>
-                    {company.address.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
+
+                <div className="space-y-6 border-t border-border pt-6">
+                  <p className="eyebrow text-muted-foreground/70">US office</p>
+                  <div className="flex items-start gap-4">
+                    <IconChip icon={Mail} variant="outline" />
+                    <span className="pt-2">
+                      {radiantControl.emails.map((e) => (
+                        <a
+                          key={e}
+                          href={`mailto:${e}`}
+                          className="block text-foreground hover:text-primary"
+                        >
+                          {e}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <IconChip icon={Phone} variant="outline" />
+                    <span className="pt-2">
+                      {radiantControl.phones.map((p) => (
+                        <a
+                          key={p.href}
+                          href={p.href}
+                          className="block text-foreground hover:text-primary"
+                        >
+                          {p.display}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -330,22 +354,101 @@ function Contact() {
         </Container>
       </Section>
 
-      <Section id="location" className="py-16 md:py-20">
+      {/* Two distinct companies (HariTech in India, Radiant in the US) shown
+          as paired columns — same shape, same weight — rather than as two
+          disconnected sections down the page. */}
+      <Section id="offices" className="py-16 md:py-20">
         <Container>
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-            <p className="eyebrow text-primary">Find us</p>
-            <p className="text-sm text-muted-foreground">{company.address.join(", ")}</p>
-          </div>
-          {/* Tinted plate so the embed reads as a map panel while it loads
-              rather than an unexplained empty box. */}
-          <div className="overflow-hidden rounded-sm border border-border bg-secondary shadow-panel">
-            <iframe
-              title="HariTech Automations location, Vadodara"
-              src={company.mapEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-[24rem] w-full border-0"
-            />
+          <SectionHeading eyebrow="Our offices" title="US office · India office." />
+          <div className={`${HEADING_GAP} grid gap-10 lg:grid-cols-2`}>
+            {[
+              {
+                key: "india",
+                label: "India office",
+                entity: company,
+                mapTitle: "HariTech Automations location, Vadodara",
+                link: undefined as { href: string; label: string } | undefined,
+              },
+              {
+                key: "us",
+                label: "US office",
+                entity: radiantControl,
+                mapTitle: "Radiant Control Systems location, Duluth",
+                link: { href: radiantControl.website, label: "radiantcontrolsystems.com" },
+              },
+            ].map((office) => (
+              <div
+                key={office.key}
+                className="flex h-full flex-col overflow-hidden rounded-sm border border-border bg-card shadow-panel"
+              >
+                <div className="p-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="eyebrow text-primary">{office.label}</p>
+                    {office.link && (
+                      <a
+                        href={office.link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={textLink("brand")}
+                      >
+                        {office.link.label}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                  <p className="mt-2 font-display text-xl font-semibold">{office.entity.name}</p>
+
+                  <div className="mt-6 space-y-5 text-sm">
+                    <div className="flex items-start gap-4">
+                      <IconChip icon={Mail} variant="outline" />
+                      <span className="pt-2">
+                        {office.entity.emails.map((e) => (
+                          <a
+                            key={e}
+                            href={`mailto:${e}`}
+                            className="block text-foreground hover:text-primary"
+                          >
+                            {e}
+                          </a>
+                        ))}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <IconChip icon={Phone} variant="outline" />
+                      <span className="pt-2">
+                        {office.entity.phones.map((p) => (
+                          <a
+                            key={p.href}
+                            href={p.href}
+                            className="block text-foreground hover:text-primary"
+                          >
+                            {p.display}
+                          </a>
+                        ))}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <IconChip icon={MapPin} variant="outline" />
+                      <address className="pt-2 not-italic leading-relaxed text-muted-foreground">
+                        {office.entity.address.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </address>
+                    </div>
+                  </div>
+                </div>
+
+                <iframe
+                  title={office.mapTitle}
+                  src={office.entity.mapEmbed}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="min-h-[18rem] w-full flex-1 border-0"
+                />
+              </div>
+            ))}
           </div>
         </Container>
       </Section>
