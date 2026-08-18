@@ -40,10 +40,7 @@ export const company = {
     copy: "American engineering governance and Indian manufacturing depth under one accountable team — specifications written to international standards, built and serviced locally.",
   },
   emails: ["info@haritatechnology.com", "enquiry@haritatechnology.com"],
-  phones: [
-    { display: "+91 98257 43029", href: "tel:+919825743029" },
-    { display: "+91 78020 58470", href: "tel:+917802058470" },
-  ],
+  phones: [{ display: "+91 98257 43029", href: "tel:+919825743029" }],
   whatsapp: "https://wa.me/919825743029",
   address: [
     "TF14, VR One, Opp. L&T Knowledge City",
