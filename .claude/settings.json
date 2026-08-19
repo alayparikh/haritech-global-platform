@@ -5,7 +5,29 @@
       "Bash(npx tsc *)",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_console_messages",
-      "mcp__playwright__browser_take_screenshot"
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(sips -c 5355 4284 /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/src.jpg)",
+      "Bash(sips -z 1500 1200 /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/src.jpg)",
+      "Bash(sips -s format png /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/src.jpg --out /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/inter.png)",
+      "Bash(cwebp -q 82 -sharp_yuv -metadata none /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/inter.png -o /private/tmp/claude-503/-Users-alay-IdeaProjects-haritech-global-platform/f5f949b8-8ab9-45ca-9027-3a289490b51d/scratchpad/tejas-patwa.webp)",
+      "Bash(git rm *)",
+      "WebFetch(domain:formsubmit.co)",
+      "Bash(curl -s https://formsubmit.co/ajax-documentation)",
+      "Bash(grep -v '^\\\\s*$')",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -i -X OPTIONS \"https://formsubmit.co/ajax/test@example.com\" -H \"Origin: https://haritechautomations.com\" -H \"Access-Control-Request-Method: POST\" -H \"Access-Control-Request-Headers: content-type\")",
+      "Bash(echo \"lint-exit:$?\")",
+      "Bash(firecrawl --version)",
+      "Read(//Users/alay/.agents/skills/firecrawl-seo-audit/**)",
+      "Read(//Users/alay/.claude/skills/**)",
+      "Bash(env)",
+      "Bash(sed 's/=.\\\\{6\\\\}.*/=<set>/')",
+      "Read(//Users/alay/.claude/**)",
+      "Read(//Users/alay/.agents/skills/firecrawl/**)",
+      "Bash(timeout 180 npx -y firecrawl-cli --status)",
+      "Bash(npx -y firecrawl-cli --status)",
+      "Bash(npx -y firecrawl-cli map \"https://haritechautomations.com\")",
+      "Bash(npx -y firecrawl-cli search \"industrial automation system integrator Vadodara PLC SCADA\" --limit 8)"
     ]
   }
 }

@@ -1,5 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Download, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import {
+  CheckCircle2,
+  Clock,
+  Download,
+  ExternalLink,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
+import { useState, type FormEvent } from "react";
 
 import {
   Select,
@@ -45,6 +55,21 @@ const fieldClass =
 const labelClass = "block text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground";
 
 /**
+ * FormSubmit emails the submission to us without a backend of our own. It only
+ * starts delivering once someone opens the confirmation mail it sends on the
+ * very first submission — until then submissions are accepted and dropped.
+ */
+const FORM_RECIPIENT = "info@radiantcontrolsystems.com";
+/**
+ * `action` points at the plain endpoint rather than the AJAX one so a visitor
+ * without JavaScript still gets a working native POST. It also has to stay an
+ * https target: Chrome disables autofill on any form aimed somewhere else,
+ * which is what the old `mailto:` action was doing.
+ */
+const FORM_ENDPOINT = `https://formsubmit.co/${FORM_RECIPIENT}`;
+const FORM_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${FORM_RECIPIENT}`;
+
+/**
  * A native <select> hands its popup to the OS — on macOS that's an oversized
  * light-grey list detached from the field, which no CSS can reach. Radix renders
  * its own listbox instead, so the popup matches the form. `name` makes Radix
@@ -82,6 +107,187 @@ function SelectField({
         </SelectContent>
       </Select>
     </div>
+  );
+}
+
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
+/**
+ * Submits over fetch so the visitor never leaves the page. reCAPTCHA has to be
+ * off for that — FormSubmit can't show a challenge to an AJAX caller — so the
+ * `_honey` honeypot below carries the spam filtering instead.
+ */
+function EnquiryForm() {
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setStatus("sending");
+
+    try {
+      const response = await fetch(FORM_ENDPOINT_AJAX, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (!response.ok) throw new Error(`FormSubmit replied ${response.status}`);
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="rounded-sm border border-border bg-card p-8 shadow-panel">
+        <IconChip icon={CheckCircle2} />
+        <h2 className="mt-5 font-display text-2xl font-bold">Enquiry received</h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          An engineer reads it and responds within one working day. If it's urgent, WhatsApp or call
+          the numbers on the left.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className={btn("outline", "md", "mt-6")}
+        >
+          Send another enquiry
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      className="rounded-sm border border-border bg-card p-8 shadow-panel"
+      action={FORM_ENDPOINT}
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="_subject" value="New enquiry from haritechautomations.com" />
+      <input type="hidden" name="_cc" value={FORM_CC} />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      {/* Bots fill every field they find; people never see this one. */}
+      <input
+        type="text"
+        name="_honey"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
+
+      <p className="eyebrow text-primary">Enquiry</p>
+      <h2 className="mt-3 font-display text-2xl font-bold">Send us the scope</h2>
+
+      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className={labelClass} htmlFor="name">
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label className={labelClass} htmlFor="company">
+            Company
+          </label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autoComplete="organization"
+            placeholder="Plant or organisation"
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label className={labelClass} htmlFor="email">
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@company.com"
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label className={labelClass} htmlFor="phone">
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="+91"
+            className={fieldClass}
+          />
+        </div>
+        <SelectField
+          id="industry"
+          label="Industry"
+          placeholder="Select an industry"
+          options={industries.map((i) => i.name)}
+        />
+        <SelectField
+          id="service"
+          label="Service needed"
+          placeholder="Select a service"
+          options={[...services.map((s) => s.title), "Not sure yet"]}
+        />
+      </div>
+
+      <div className="mt-5">
+        <label className={labelClass} htmlFor="message">
+          What needs to run better?
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          required
+          placeholder="Describe the scope, the constraint or the problem you are seeing on the floor."
+          className={`${fieldClass} h-auto resize-y py-3`}
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gradient-brand px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-panel transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      >
+        {status === "sending" ? "Sending…" : "Send enquiry"}
+      </button>
+
+      {status === "error" ? (
+        <p role="alert" className="mt-4 text-xs leading-relaxed text-destructive">
+          That didn't go through. Please try again, or email or WhatsApp us directly using the
+          details on the left.
+        </p>
+      ) : (
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+          An engineer responds within one working day. Prefer to reach us directly? Use the email,
+          phone or WhatsApp details on the left.
+        </p>
+      )}
+    </form>
   );
 }
 
@@ -213,110 +419,7 @@ function Contact() {
 
             {/* Enquiry form */}
             <div className="lg:col-span-7">
-              <form
-                className="rounded-sm border border-border bg-card p-8 shadow-panel"
-                action={`mailto:${company.emails[1]}`}
-                method="post"
-                encType="text/plain"
-              >
-                <p className="eyebrow text-primary">Enquiry</p>
-                <h2 className="mt-3 font-display text-2xl font-bold">Send us the scope</h2>
-
-                <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label className={labelClass} htmlFor="name">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      placeholder="Your name"
-                      className={fieldClass}
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClass} htmlFor="company">
-                      Company
-                    </label>
-                    <input
-                      id="company"
-                      name="company"
-                      type="text"
-                      autoComplete="organization"
-                      placeholder="Plant or organisation"
-                      className={fieldClass}
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClass} htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      placeholder="you@company.com"
-                      className={fieldClass}
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClass} htmlFor="phone">
-                      Phone
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="+91"
-                      className={fieldClass}
-                    />
-                  </div>
-                  <SelectField
-                    id="industry"
-                    label="Industry"
-                    placeholder="Select an industry"
-                    options={industries.map((i) => i.name)}
-                  />
-                  <SelectField
-                    id="service"
-                    label="Service needed"
-                    placeholder="Select a service"
-                    options={[...services.map((s) => s.title), "Not sure yet"]}
-                  />
-                </div>
-
-                <div className="mt-5">
-                  <label className={labelClass} htmlFor="message">
-                    What needs to run better?
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    placeholder="Describe the scope, the constraint or the problem you are seeing on the floor."
-                    className={`${fieldClass} h-auto resize-y py-3`}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-gradient-brand px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-panel transition-transform hover:-translate-y-0.5 sm:w-auto"
-                >
-                  Send enquiry
-                </button>
-                <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-                  Submitting opens your mail client addressed to {company.emails[1]}. If that does
-                  not work on your device, email or WhatsApp us directly using the details on the
-                  left.
-                </p>
-              </form>
+              <EnquiryForm />
             </div>
           </div>
         </Container>
