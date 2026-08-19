@@ -169,7 +169,7 @@ function EnquiryForm() {
       onSubmit={handleSubmit}
     >
       <input type="hidden" name="_subject" value="New enquiry from haritechautomations.com" />
-      <input type="hidden" name="_cc" value={FORM_CC} />
+      {/* <input type="hidden" name="_cc" value={FORM_CC} /> */}
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       {/* Bots fill every field they find; people never see this one. */}

@@ -27,7 +27,8 @@
       "Bash(timeout 180 npx -y firecrawl-cli --status)",
       "Bash(npx -y firecrawl-cli --status)",
       "Bash(npx -y firecrawl-cli map \"https://haritechautomations.com\")",
-      "Bash(npx -y firecrawl-cli search \"industrial automation system integrator Vadodara PLC SCADA\" --limit 8)"
+      "Bash(npx -y firecrawl-cli search \"industrial automation system integrator Vadodara PLC SCADA\" --limit 8)",
+      "Bash(npx -y firecrawl-cli search \"\\\\\"Haritech Automations\\\\\" Vadodara\" --limit 6)"
     ]
   }
 }
