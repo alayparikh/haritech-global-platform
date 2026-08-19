@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { ArrowRight, Factory, Globe2, Phone } from "lucide-react";
 
 import aboutImg from "@/assets/about-facility.jpg";
@@ -23,16 +24,13 @@ import { familyBySlug } from "@/data/industries";
 import { company, leadership, principles } from "@/data/site";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About HariTech — Systems Integrator, Not a Vendor" },
-      {
-        name: "description",
-        content:
-          "HariTech Automations, Vadodara: a USA–India joint venture, 22+ years integrating PLC, SCADA, DCS, HMI, robotics and control-panel automation systems.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "About HariTech — Systems Integrator, Not a Vendor",
+      description:
+        "HariTech Automations, Vadodara: a USA–India joint venture, 22+ years integrating PLC, SCADA, DCS, HMI, robotics and control-panel automation systems.",
+      path: "/about",
+    }),
   component: About,
 });
 
@@ -104,10 +102,10 @@ function About() {
                 lede="HariTech is a systems integrator for PLC, SCADA, DCS, HMI, robotics and control-panel automation — backed by a team with more than 22 years of experience."
               />
               <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Our integration work is built to industry standards, platform-agnostic across
-                major PLC and SCADA vendors, and tuned to each client's existing systems. From a
-                single controller migration to a greenfield line, our teams stay on site until the
-                system is stable and your people can run it without us.
+                Our integration work is built to industry standards, platform-agnostic across major
+                PLC and SCADA vendors, and tuned to each client's existing systems. From a single
+                controller migration to a greenfield line, our teams stay on site until the system
+                is stable and your people can run it without us.
               </p>
               <ul className="mt-8 space-y-4">
                 {[

@@ -11,6 +11,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { seo } from "@/lib/seo";
+import { STRUCTURED_DATA } from "@/lib/structured-data";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -80,20 +82,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HariTech — Intense to High Impact" },
-      {
-        name: "description",
-        content:
-          "HariTech delivers engineering, heavy industry, assembly supply chain, electronics, dairy, metal and renewable industrial solutions.",
-      },
       { name: "author", content: "HariTech" },
-      { property: "og:title", content: "HariTech — Intense to High Impact" },
-      {
-        property: "og:description",
-        content: "Industrial engineering and manufacturing solutions across six sectors.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      // Only a route that sets no head of its own falls back to these, so they
+      // describe the site rather than any one page. Every real page overrides
+      // them through `seo()`.
+      ...seo({
+        title: "HariTech — Industrial Automation Systems Integrator, Vadodara",
+        description:
+          "HariTech Automations integrates PLC, SCADA, DCS, HMI and robotics across 18 industries — control panels, commissioning and AMC support from Vadodara, Gujarat.",
+        path: "/",
+      }).meta,
     ],
     links: [
       {
@@ -129,6 +127,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA }} />
       </head>
       <body>
         {children}

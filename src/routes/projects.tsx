@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/site/Container";
@@ -19,16 +20,13 @@ import { projects } from "@/data/projects";
 import { deliveryTracks, processSteps } from "@/data/site";
 
 export const Route = createFileRoute("/projects")({
-  head: () => ({
-    meta: [
-      { title: "Projects & Delivery Tracks | HariTech" },
-      {
-        name: "description",
-        content:
-          "Proof points across design, panels and integration — PLC/SCADA migrations, batch automation and SCADA monitoring work delivered by HariTech.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Automation Projects & Delivery Tracks | HariTech",
+      description:
+        "Proof points across design, panels and integration — PLC and SCADA migrations, batch automation and plant monitoring delivered by HariTech from Vadodara.",
+      path: "/projects",
+    }),
   component: Projects,
 });
 

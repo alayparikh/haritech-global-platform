@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { ArrowRight, Check } from "lucide-react";
 
 import { Container } from "@/components/site/Container";
@@ -17,16 +18,13 @@ import { familyBySlug, industries } from "@/data/industries";
 import { services } from "@/data/services";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services & Solutions — PLC, SCADA, DCS, Robotics | HariTech" },
-      {
-        name: "description",
-        content:
-          "Twelve integration packages: PLC programming, SCADA & HMI, DCS integration, robotics & motion control, control panels, instrumentation, industrial networking, MES data, migration, FAT/SAT, safety systems and AMC support.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Services — PLC, SCADA, DCS & Robotics Integration | HariTech",
+      description:
+        "Twelve automation packages: PLC programming, SCADA & HMI, DCS integration, robotics, control panels, instrumentation, networking, MES, migration, FAT/SAT and AMC.",
+      path: "/services",
+    }),
   component: Services,
 });
 

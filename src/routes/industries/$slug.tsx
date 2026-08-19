@@ -18,6 +18,7 @@ import {
 import { getFamily, getIndustry, industriesByFamily, industryNeighbours } from "@/data/industries";
 import { projectsForIndustry } from "@/data/projects";
 import { getService } from "@/data/services";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/industries/$slug")({
   // Validate only — the industry record holds icon components, which cannot be
@@ -28,14 +29,11 @@ export const Route = createFileRoute("/industries/$slug")({
   head: ({ params }) => {
     const industry = getIndustry(params.slug);
     if (!industry) return {};
-    return {
-      meta: [
-        { title: `${industry.name} — Industrial Engineering | HariTech` },
-        { name: "description", content: industry.tagline },
-        { property: "og:title", content: `${industry.name} | HariTech` },
-        { property: "og:description", content: industry.tagline },
-      ],
-    };
+    return seo({
+      title: industry.metaTitle,
+      description: industry.metaDescription,
+      path: `/industries/${industry.slug}`,
+    });
   },
   component: IndustryDetail,
 });
@@ -89,6 +87,28 @@ function IndustryDetail() {
           </div>
         </Container>
       </Section>
+
+      {/* Sector detail, where the templated sections don't say enough on their own */}
+      {industry.deepDive && (
+        <Section id="detail" tone="muted">
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="lg:col-span-5">
+                <SectionHeading eyebrow="In practice" title={industry.deepDive.heading} />
+              </div>
+              <div className="lg:col-span-7">
+                <div className="flex flex-col gap-5">
+                  {industry.deepDive.body.map((paragraph) => (
+                    <p key={paragraph} className="text-sm leading-relaxed text-muted-foreground">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* Solutions */}
       <Section id="solutions" tone="ink">

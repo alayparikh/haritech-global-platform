@@ -46,6 +46,13 @@ export type Industry = {
   name: string;
   family: FamilySlug;
   tagline: string;
+  /**
+   * Search-facing title and description. Kept apart from `name`/`tagline`
+   * because those are display copy: the buyer searches "dairy plant
+   * automation", not "Dairy Industries".
+   */
+  metaTitle: string;
+  metaDescription: string;
   intro: string;
   image: string;
   /** Shown until the generated photo exists at `image`. */
@@ -54,6 +61,12 @@ export type Industry = {
   challenges: string[];
   solutions: string[];
   standards?: string[];
+  /**
+   * Sector-specific detail for pages whose templated content otherwise reads
+   * close to a neighbouring industry — solar against renewables, dairy against
+   * pharma. Named equipment and named standards are what separate them.
+   */
+  deepDive?: { heading: string; body: string[] };
   relatedServices: string[];
 };
 
@@ -75,7 +88,7 @@ export const families: Family[] = [
     image: "/images/families/heavy-engineering-metals.jpg",
     fallbackImage: engineeringImg,
     icon: HardHat,
-    },
+  },
   {
     slug: "process-chemical",
     name: "Process & Chemical",
@@ -130,6 +143,9 @@ export const industries: Industry[] = [
     name: "Engineering & Heavy Industries",
     family: "heavy-engineering-metals",
     tagline: "Control system integration built for continuous duty cycles.",
+    metaTitle: "Heavy Engineering Automation — PLC & SCADA | HariTech",
+    metaDescription:
+      "Control system integration built for continuous duty cycles. PLC, SCADA and drive automation for heavy engineering plants, engineered from Vadodara, Gujarat.",
     intro:
       "Heavy engineering floors punish anything specified on paper alone. We integrate PLCs, SCADA and drive systems with engineers who understand production, so control logic survives contact with real load, real vibration and real shift patterns.",
     image: "/images/industries/engineering-heavy-industries.jpg",
@@ -148,7 +164,12 @@ export const industries: Industry[] = [
       "Instrumentation, loop checking and interlock verification",
       "AMC cover with defined response times for control-system faults",
     ],
-    standards: ["IEC 61439 (panels)", "IEC 60204-1 (machine electrical)", "NFPA 79", "IEC 62443 (network security)"],
+    standards: [
+      "IEC 61439 (panels)",
+      "IEC 60204-1 (machine electrical)",
+      "NFPA 79",
+      "IEC 62443 (network security)",
+    ],
     relatedServices: ["plc-programming", "scada-hmi", "control-panels"],
   },
   {
@@ -156,6 +177,9 @@ export const industries: Industry[] = [
     name: "Metal Industries",
     family: "heavy-engineering-metals",
     tagline: "Process control for rolling, machining and treatment lines at volume.",
+    metaTitle: "Metal Industry Automation — Rolling & Furnace | HariTech",
+    metaDescription:
+      "Process control for rolling, machining and heat-treatment lines at volume. PLC, SCADA and drive integration for metal plants, engineered from Vadodara, Gujarat.",
     intro:
       "Rolling mills, machining shops and treatment lines generate data at a rate that decides whether a fault is caught in seconds or discovered as scrap. We build the control and monitoring systems that keep pace with production speed.",
     image: "/images/industries/metal-industries.jpg",
@@ -182,6 +206,9 @@ export const industries: Industry[] = [
     name: "Forging & Casting",
     family: "heavy-engineering-metals",
     tagline: "Safety-rated control for the highest-consequence floors we work on.",
+    metaTitle: "Forging & Casting Automation — Safety PLC | HariTech",
+    metaDescription:
+      "Safety-rated control for press, furnace and handling lines. Interlocks, PLC and SCADA integration to IEC 61508 and 62061, engineered from Vadodara, Gujarat.",
     intro:
       "Forges and foundries are the hardest environment we integrate into: molten metal, shock load and heat in the same cell as the operator. Every control and safety system here is specified for the failure mode that actually matters, not the generic template.",
     image: "/images/industries/forging-casting.jpg",
@@ -208,6 +235,9 @@ export const industries: Industry[] = [
     name: "Concrete Mix & RMC",
     family: "heavy-engineering-metals",
     tagline: "Batching automation and recipe control for consistent yield.",
+    metaTitle: "Concrete Batching Plant Automation & RMC | HariTech",
+    metaDescription:
+      "Batching automation and recipe control for consistent yield. PLC, weighing and SCADA integration for RMC and concrete mix plants, engineered from Vadodara.",
     intro:
       "Ready-mix and precast plants live or die on batching consistency. We automate the weighing, dosing and sequencing that decide whether every batch matches the mix design, not just the first one.",
     image: "/images/industries/concrete-mix.jpg",
@@ -236,6 +266,9 @@ export const industries: Industry[] = [
     name: "Chemical Industries",
     family: "process-chemical",
     tagline: "DCS and safety-instrumented control for reactive process streams.",
+    metaTitle: "Chemical Plant Automation — DCS, PLC & SIS | HariTech",
+    metaDescription:
+      "DCS and safety-instrumented control for reactive process streams. PLC, SCADA and SIL-rated system integration for chemical plants, engineered from Vadodara.",
     intro:
       "In chemical plants the control system is a safety system. Hazardous-area classification, interlock logic and SIS design are decided at engineering stage — we design them in rather than retrofitting after an inspection finds them missing.",
     image: "/images/industries/chemical.jpg",
@@ -254,7 +287,12 @@ export const industries: Industry[] = [
       "Alarm rationalisation to ISA-18.2 for upset-condition clarity",
       "SCADA integration with discharge and emission compliance monitoring",
     ],
-    standards: ["IEC 61511 / SIL", "ATEX / IECEx zoning", "ISA-18.2 (alarm management)", "IEC 62443"],
+    standards: [
+      "IEC 61511 / SIL",
+      "ATEX / IECEx zoning",
+      "ISA-18.2 (alarm management)",
+      "IEC 62443",
+    ],
     relatedServices: ["dcs-integration", "safety-systems", "control-panels"],
   },
   {
@@ -262,6 +300,9 @@ export const industries: Industry[] = [
     name: "Petrochemical",
     family: "process-chemical",
     tagline: "Classified-area automation with full traceability and documentation.",
+    metaTitle: "Petrochemical Automation — Hazardous Area | HariTech",
+    metaDescription:
+      "Classified-area automation with full traceability and documentation. Ex-rated instrumentation, DCS and SCADA integration, engineered from Vadodara, Gujarat.",
     intro:
       "Petrochemical scope is governed by classification, testing and documentation. We work to the permit system, deliver full loop and FAT records, and design control systems that can be isolated and maintained without taking a unit down.",
     image: "/images/industries/petrochemical.jpg",
@@ -288,6 +329,9 @@ export const industries: Industry[] = [
     name: "Plastic & Extrusion",
     family: "process-chemical",
     tagline: "Process control that holds tolerance across a shift, not just at startup.",
+    metaTitle: "Plastic & Extrusion Line Automation — PLC | HariTech",
+    metaDescription:
+      "Process control that holds tolerance across a shift, not just at startup. Extruder PLC, drive and SCADA integration for plastics, engineered from Vadodara.",
     intro:
       "Extrusion, moulding and film lines are control problems dressed as production problems. Consistent temperature, speed and pressure control loops are what hold dimensional tolerance from the first metre to the last.",
     image: "/images/industries/plastic-extrusion.jpg",
@@ -316,6 +360,9 @@ export const industries: Industry[] = [
     name: "Dairy Industries",
     family: "food-dairy-lifesciences",
     tagline: "CIP, batch and cold-chain control with full traceability.",
+    metaTitle: "Dairy Plant Automation — CIP, Batch & SCADA | HariTech",
+    metaDescription:
+      "CIP, batch and cold-chain control with full traceability. ISA-88 batch SCADA and refrigeration monitoring for dairy plants, engineered from Vadodara, Gujarat.",
     intro:
       "Dairy plants are judged on hygiene and on cold-chain integrity, both of which depend on control systems doing what they are supposed to do every cycle, unattended. We automate CIP, batching and refrigeration monitoring so nothing is left to a checklist.",
     image: "/images/industries/dairy.jpg",
@@ -335,6 +382,13 @@ export const industries: Industry[] = [
       "Instrumentation for flow, temperature and conductivity verification",
     ],
     standards: ["FSSAI", "3-A Sanitary Standards", "ISA-88 (batch control)"],
+    deepDive: {
+      heading: "CIP that produces a record, not just a rinse",
+      body: [
+        "The difference between a dairy plant that passes audit and one that argues through it is whether the CIP cycle produced verifiable evidence. We instrument the return line for conductivity, temperature and flow, and write the PLC logic so a cycle can only be marked complete when all three held above setpoint for the required contact time — no operator override that isn't attributed and logged. A short rinse becomes an alarm and a deviation record rather than a silent pass.",
+        "Above that sits ISA-88 batch structure: recipes as data rather than rewritten logic, so a new SKU is a recipe entry and not a PLC download during production. Pasteuriser diversion, silo allocation and cold-room monitoring feed the same historian, which is what makes end-to-end traceability possible — from raw-milk reception through to the finished batch code, retrievable in the form FSSAI and 3-A audits actually ask for.",
+      ],
+    },
     relatedServices: ["scada-hmi", "mes-data", "instrumentation"],
   },
   {
@@ -342,6 +396,9 @@ export const industries: Industry[] = [
     name: "Food & Beverages",
     family: "food-dairy-lifesciences",
     tagline: "Line control and data integration for high-speed filling and packing.",
+    metaTitle: "Food & Beverage Automation — Line Control | HariTech",
+    metaDescription:
+      "Line control and data integration for high-speed filling and packing. PLC, SCADA and MES integration for food and beverage plants, engineered from Vadodara.",
     intro:
       "Beverage and packaged food lines run fast and stop expensively. We engineer the PLC and SCADA layer that keeps a filler, capper and packer synchronised — and keeps production data flowing into the reports the plant is audited on.",
     image: "/images/industries/food-beverages.jpg",
@@ -368,6 +425,9 @@ export const industries: Industry[] = [
     name: "Sugar Industries",
     family: "food-dairy-lifesciences",
     tagline: "Season-critical process control with no tolerance for downtime.",
+    metaTitle: "Sugar Plant Automation — Season-Critical PLC | HariTech",
+    metaDescription:
+      "Season-critical process control with no tolerance for downtime. Mill, boiling house and cogeneration PLC and SCADA integration, engineered from Vadodara.",
     intro:
       "A sugar mill's crushing season leaves no room for a control-system failure. We plan work into the off-season window, integrate DCS and PLC control across the crushing-to-boiling train, and hand back systems the mill's own team can run.",
     image: "/images/industries/sugar.jpg",
@@ -394,6 +454,9 @@ export const industries: Industry[] = [
     name: "Pharmaceutical",
     family: "food-dairy-lifesciences",
     tagline: "Validated automation with documentation that passes audit.",
+    metaTitle: "Pharma Automation — GAMP 5 Validated PLC | HariTech",
+    metaDescription:
+      "Validated automation with documentation that passes audit. GAMP 5 and 21 CFR Part 11 aligned PLC, SCADA and batch systems, engineered from Vadodara, Gujarat.",
     intro:
       "In pharma the system is not delivered until the paperwork is. We design PLC and SCADA control with 21 CFR Part 11 and qualification in mind, and hand over DQ/IQ/OQ documentation alongside the automation.",
     image: "/images/industries/pharma.jpg",
@@ -413,6 +476,13 @@ export const industries: Industry[] = [
       "Alarm, audit-trail and event integration tied to batch identity",
     ],
     standards: ["WHO GMP", "Schedule M", "21 CFR Part 11", "ISA-88"],
+    deepDive: {
+      heading: "Validation is a documentation discipline, not a feature",
+      body: [
+        "Pharmaceutical automation is judged on the paperwork trail as much as the running system. We work to GAMP 5 categories from the start: URS, FS and DS written before logic, traceability matrix maintained through the build, and IQ/OQ/PQ protocols executed and signed rather than reconstructed afterwards. Retro-fitting that documentation onto a finished system costs more than writing it alongside — and auditors can tell the difference.",
+        "In the system itself, 21 CFR Part 11 sets the shape: unique user accounts with no shared logins, an audit trail that cannot be edited or cleared from the HMI, electronic signatures on batch-affecting actions, and time synchronisation across every node so records reconcile. Change control continues after handover, because a validated system that gets an undocumented logic patch in year two is no longer validated.",
+      ],
+    },
     relatedServices: ["scada-hmi", "commissioning-fat-sat", "mes-data"],
   },
 
@@ -422,6 +492,9 @@ export const industries: Industry[] = [
     name: "Automobile",
     family: "mobility-electronics",
     tagline: "Line control and robotics engineered around takt time.",
+    metaTitle: "Automotive Plant Automation & Robotics | HariTech",
+    metaDescription:
+      "Line control and robotics engineered around takt time. PLC, robot cell and conveyor integration for automotive and component plants, engineered from Vadodara.",
     intro:
       "Automotive plants measure everything in seconds. Paint, weld and assembly control systems have to hold their sequence continuously, and any work we do on a live line is planned around the plant's own stoppage calendar.",
     image: "/images/industries/automobile.jpg",
@@ -448,6 +521,9 @@ export const industries: Industry[] = [
     name: "Electronics Industries",
     family: "mobility-electronics",
     tagline: "Traceable line control for boards and precision assembly.",
+    metaTitle: "Electronics Manufacturing Automation — SCADA | HariTech",
+    metaDescription:
+      "Traceable line control for boards and precision assembly. PLC, SCADA and MES traceability integration for electronics plants, engineered from Vadodara.",
     intro:
       "Electronics assembly fails quietly — from a drifting reflow profile, from an untracked lot, from a controller nobody documented. We build the control and traceability infrastructure so every board carries its process history.",
     image: "/images/industries/electronics.jpg",
@@ -474,6 +550,9 @@ export const industries: Industry[] = [
     name: "Assembly & Supply Chain",
     family: "mobility-electronics",
     tagline: "Sortation, tracking and cell control without buffer waste.",
+    metaTitle: "Assembly & Warehouse Automation — PLC | HariTech",
+    metaDescription:
+      "Sortation, tracking and cell control without buffer waste. Conveyor, barcode and PLC integration for assembly and supply chain lines, engineered from Vadodara.",
     intro:
       "Sub-assembly and logistics operations waste more in untracked movement than in cycle time. We control the conveyors, sortation and storage systems so material is tracked and released exactly when the line consumes it.",
     image: "/images/industries/assembly-supply-chain.jpg",
@@ -502,6 +581,9 @@ export const industries: Industry[] = [
     name: "Renewable Industries",
     family: "energy-renewables",
     tagline: "SCADA and control integration for generation and load-side systems.",
+    metaTitle: "Renewable Energy SCADA & Plant Control | HariTech",
+    metaDescription:
+      "SCADA and control integration for generation and load-side systems. Grid-side monitoring, RTU and communication engineering, delivered from Vadodara, Gujarat.",
     intro:
       "Renewable capacity only pays back if the control system behind it is trustworthy. We integrate SCADA, monitoring and interlocking so generation, storage and industrial load-management systems report accurately and fail safely.",
     image: "/images/industries/renewable-energy.jpg",
@@ -521,6 +603,13 @@ export const industries: Industry[] = [
       "Post-commissioning performance monitoring against committed output",
     ],
     standards: ["IEC 61439 (panels)", "IEC 62443", "IEEE 1547 (interconnection)"],
+    deepDive: {
+      heading: "Generation, storage and load under one control room",
+      body: [
+        "Renewable work at plant scale is rarely a single asset. A site runs rooftop solar, a wind PPA feeding the same bus, a battery for peak shaving, and a diesel set that must never parallel incorrectly — each arriving with its own vendor portal and none of them talking to the plant's load-management system. Our work is the layer above: protocol conversion, a unified tag structure, and interlocking that decides which source carries the load and what happens when one drops.",
+        "That layer is also where interconnection compliance lives. Anti-islanding, ramp-rate limits and the reactive-power envelope agreed with the DISCOM all have to be enforced and evidenced, not just configured once at commissioning. We build the control logic to IEEE 1547 and secure the network path to IEC 62443, so the export point behaves the way the connection agreement says it does — and there is a log to prove it did.",
+      ],
+    },
     relatedServices: ["scada-hmi", "industrial-networking", "mes-data"],
   },
   {
@@ -528,6 +617,9 @@ export const industries: Industry[] = [
     name: "Solar",
     family: "energy-renewables",
     tagline: "Monitoring, control and communication for rooftop and ground-mount arrays.",
+    metaTitle: "Solar Plant SCADA & Monitoring Systems | HariTech",
+    metaDescription:
+      "Monitoring, control and communication for rooftop and ground-mount arrays. String-level SCADA, weather-station and inverter integration, delivered from Vadodara.",
     intro:
       "Solar on an industrial site is a monitoring and communication job as much as an electrical one. We integrate SCADA, inverter communication and string-level monitoring so the array reports what it is actually generating.",
     image: "/images/industries/solar.jpg",
@@ -547,6 +639,13 @@ export const industries: Industry[] = [
       "AMC covering monitoring-system uptime and inspection",
     ],
     standards: ["IEC 61439", "MNRE technical specifications", "IEC 62443"],
+    deepDive: {
+      heading: "Where solar sites actually lose generation",
+      body: [
+        "Almost none of the generation we recover on a solar site is recovered at the panel. It is recovered at the communication layer — a Sungrow or Sineng inverter speaking Modbus TCP on one subnet, a plant SCADA expecting IEC 61850 on another, and a string combiner box whose fault contact was never wired anywhere. We build the gateway and register map that closes that gap, then prove it with a point-to-point check against the inverter's own portal.",
+        "Once the data is trustworthy, performance ratio becomes a number you can argue with a vendor about. We correlate string-level current against pyranometer irradiance and module temperature, so a 4% shortfall resolves into a specific cause — soiling, a failed string fuse, clipping, or a genuine irradiance day. For rooftop plants on an operating factory, that reporting matters more than the array: it is what decides whether the captive-consumption case holds up at the end of the year.",
+      ],
+    },
     relatedServices: ["scada-hmi", "industrial-networking", "amc-support"],
   },
 
@@ -556,6 +655,9 @@ export const industries: Industry[] = [
     name: "Water Treatment",
     family: "utilities-environment",
     tagline: "Automated dosing and compliance monitoring for RO, ETP and STP systems.",
+    metaTitle: "Water Treatment Automation — RO, ETP & STP | HariTech",
+    metaDescription:
+      "Automated dosing and compliance monitoring for RO, ETP and STP systems. PLC, SCADA and CPCB-ready reporting integration, engineered from Vadodara, Gujarat.",
     intro:
       "We integrate control systems for water-treatment plant builders and for industrial clients directly. Either way, the target is the same: automated dosing and monitoring that meets consent conditions every day, not only on the day of inspection.",
     image: "/images/industries/water-treatment.jpg",
@@ -575,6 +677,13 @@ export const industries: Industry[] = [
       "Obsolescence audits and controller migration on existing treatment trains",
     ],
     standards: ["CPCB / GPCB consent norms", "IEC 61439", "IEC 62443"],
+    deepDive: {
+      heading: "Dosing that defends a discharge consent",
+      body: [
+        "An ETP or STP is a compliance asset before it is a process one. The control system's job is to keep the discharge inside consent and to be able to demonstrate it later: pH, TSS, COD and flow logged continuously, dosing pumps trimmed against live analyser feedback rather than a fixed timer, and every setpoint change attributed to a user. When a pollution board queries a reading, the answer should be a report, not a recollection.",
+        "For RO plants the economics sit in the recovery and the membranes. We monitor differential pressure and normalised permeate flow to schedule CIP on evidence instead of a calendar, and interlock the high-pressure pump against low feed pressure and out-of-range pH so a membrane stack is not damaged by a fault upstream. Remote alarming matters here too — most of these plants run unattended overnight, which is exactly when a dosing pump fails.",
+      ],
+    },
     relatedServices: ["scada-hmi", "instrumentation", "migration-upgrades"],
   },
   {
@@ -582,6 +691,9 @@ export const industries: Industry[] = [
     name: "Cooling Towers & Industrial Fans",
     family: "utilities-environment",
     tagline: "Automated control that holds approach temperature year-round.",
+    metaTitle: "Cooling Tower & Industrial Fan Automation | HariTech",
+    metaDescription:
+      "Automated control that holds approach temperature year-round. VFD, PLC and SCADA integration for cooling towers and industrial fans, engineered from Vadodara.",
     intro:
       "A cooling tower quietly drifting off its approach temperature costs more than most plants realise, and manual logging rarely catches it in time. We automate control and monitoring for heat-rejection systems — and verify performance after handover.",
     image: "/images/industries/cooling-towers-fans.jpg",
@@ -601,6 +713,13 @@ export const industries: Industry[] = [
       "Performance verification against approach and range after commissioning",
     ],
     standards: ["CTI performance standards", "IEC 61439", "IEC 62443"],
+    deepDive: {
+      heading: "Approach temperature is a control problem",
+      body: [
+        "A cooling tower rarely fails outright; it drifts. Approach temperature creeps up over a season, condenser pressure follows, and the chillers quietly consume more power for the same duty. We put fan speed under VFD control against measured approach rather than a fixed schedule, sequence multiple cells so they load evenly instead of one running against a stalled neighbour, and alarm on the drift itself so it surfaces as a maintenance job rather than an energy bill.",
+        "The mechanical protections belong in the same logic: vibration switches and gearbox oil-temperature interlocks wired to trip the fan and raise an event, not just cut power silently. On the water side we monitor conductivity and control blowdown against it, which holds cycles of concentration where they were designed to be — the single biggest lever on both make-up water consumption and scale on the fill.",
+      ],
+    },
     relatedServices: ["instrumentation", "scada-hmi", "amc-support"],
   },
 ];

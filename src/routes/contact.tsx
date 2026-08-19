@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import {
   CheckCircle2,
   Clock,
@@ -35,16 +36,13 @@ import { services } from "@/data/services";
 import { company, radiantControl, resources } from "@/data/site";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact HariTech — Vadodara, Gujarat" },
-      {
-        name: "description",
-        content:
-          "Send a scope, a drawing or a problem statement to HariTech Automations, Vadodara. An engineer responds within one working day.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Contact HariTech — Automation Engineers, Vadodara",
+      description:
+        "Send a scope, a drawing or a problem statement to HariTech Automations, Vadodara. An engineer — not a salesperson — responds within one working day.",
+      path: "/contact",
+    }),
   component: Contact,
 });
 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 
 import heroImg from "@/assets/hero-industry.jpg";
@@ -28,25 +29,13 @@ import { capabilities } from "@/data/site";
 import { clients } from "@/data/clients";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "HariTech — Industrial Automation Systems Integrator, Vadodara" },
-      {
-        name: "description",
-        content:
-          "HariTech Automations — a USA–India joint venture — integrates PLC, SCADA, DCS, HMI and robotics across 18 industries — 22+ years of field experience.",
-      },
-      {
-        property: "og:title",
-        content: "HariTech — Industrial Automation Systems Integrator, Vadodara",
-      },
-      {
-        property: "og:description",
-        content:
-          "PLC, SCADA, DCS, HMI and robotics integration across 18 industries — from control-panel build to commissioning and AMC support.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "HariTech — Industrial Automation Systems Integrator, Vadodara",
+      description:
+        "HariTech Automations — a USA–India joint venture — integrates PLC, SCADA, DCS, HMI and robotics across 18 industries. 22+ years of field experience, Vadodara.",
+      path: "/",
+    }),
   component: Home,
 });
 

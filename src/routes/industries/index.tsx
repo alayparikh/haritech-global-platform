@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { seo } from "@/lib/seo";
+
 import { Container } from "@/components/site/Container";
 import { CTABand } from "@/components/site/CTABand";
 import { PageHero } from "@/components/site/PageHero";
@@ -11,16 +13,13 @@ import { HEADING_GAP, Section } from "@/components/site/primitives";
 import { families, familyBySlug, industries, industriesByFamily } from "@/data/industries";
 
 export const Route = createFileRoute("/industries/")({
-  head: () => ({
-    meta: [
-      { title: "Industries We Serve — 18 Sectors | HariTech" },
-      {
-        name: "description",
-        content:
-          "HariTech engineers utility and process systems for 18 industries: heavy engineering, metals, forging, chemical, petrochemical, pharma, dairy, food, sugar, automobile, electronics, solar, water treatment and more.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Industries We Serve — 18 Sectors | HariTech",
+      description:
+        "PLC and SCADA automation for 18 industries: heavy engineering, metals, forging, chemical, pharma, dairy, food, sugar, automobile, electronics, solar and water treatment.",
+      path: "/industries",
+    }),
   component: IndustriesIndex,
 });
 

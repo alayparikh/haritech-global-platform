@@ -20,6 +20,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+/**
+ * Canonical origin. The apex 308-redirects here, so every canonical, Open Graph
+ * URL and sitemap entry has to use the `www` host or they disagree with the
+ * redirect.
+ */
+export const siteUrl = "https://www.haritechautomations.com";
+
 export type NavLink = { to: string; label: string; icon: LucideIcon };
 
 export const navLinks: NavLink[] = [

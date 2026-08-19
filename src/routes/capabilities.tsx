@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 
 import { Container } from "@/components/site/Container";
 import { CTABand } from "@/components/site/CTABand";
@@ -10,16 +11,13 @@ import { familyBySlug } from "@/data/industries";
 import { capabilities, deliveryTracks, engineeringNotes, processSteps } from "@/data/site";
 
 export const Route = createFileRoute("/capabilities")({
-  head: () => ({
-    meta: [
-      { title: "Capabilities & Process | HariTech" },
-      {
-        name: "description",
-        content:
-          "Concept to commissioning, platform-agnostic integration, compliance by design and multi-sector experience — plus HariTech's four-stage delivery route from assessment to lifecycle support.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Automation Capabilities & Delivery Process | HariTech",
+      description:
+        "Concept to commissioning, platform-agnostic PLC and SCADA integration, compliance by design, and a four-stage delivery route from assessment to lifecycle support.",
+      path: "/capabilities",
+    }),
   component: Capabilities,
 });
 
