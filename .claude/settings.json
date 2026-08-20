@@ -28,7 +28,16 @@
       "Bash(npx -y firecrawl-cli --status)",
       "Bash(npx -y firecrawl-cli map \"https://haritechautomations.com\")",
       "Bash(npx -y firecrawl-cli search \"industrial automation system integrator Vadodara PLC SCADA\" --limit 8)",
-      "Bash(npx -y firecrawl-cli search \"\\\\\"Haritech Automations\\\\\" Vadodara\" --limit 6)"
+      "Bash(npx -y firecrawl-cli search \"\\\\\"Haritech Automations\\\\\" Vadodara\" --limit 6)",
+      "Bash(npx -y firecrawl-cli scrape \"https://mpolaris.in/32-industrial-automation\" -o comp-polaris.md)",
+      "Bash(npx -y firecrawl-cli scrape \"https://sabarcorporation.com/\" -o comp-sabar.md)",
+      "Bash(git log *)",
+      "Read(//Users/alay/IdeaProjects/haritech-global-platform/src/routes/industries/**)",
+      "Bash(cd /Users/alay/IdeaProjects/haritech-global-platform *)",
+      "Bash(node scripts/generate-sitemap.mjs)",
+      "Bash(sips -g pixelWidth -g pixelHeight src/assets/hero-industry.jpg)",
+      "Bash(npx -y playwright --version)",
+      "Bash(sips -s format jpeg -s formatOptions 88 __TRACKED_VAR__/og-cover.png --out public/og-cover.jpg)"
     ]
   }
 }

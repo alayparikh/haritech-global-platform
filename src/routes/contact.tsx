@@ -297,6 +297,7 @@ function Contact() {
         title="Tell us what needs to run better."
         lede="Send a scope, a drawing or just a problem statement. An engineer — not a salesperson — responds within one working day."
         image="/images/families/utilities-environment.jpg"
+        imageAlt="Water treatment plant instrumentation under SCADA control"
         fallbackImage={familyBySlug["utilities-environment"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Contact" }]}
         scrollTo="enquiry"

@@ -17,6 +17,7 @@ export function PageHero({
   title,
   lede,
   image,
+  imageAlt,
   fallbackImage,
   crumbs = [],
   scrollTo,
@@ -26,6 +27,12 @@ export function PageHero({
   title: string;
   lede?: string;
   image?: string;
+  /**
+   * Describes the backdrop photo. It stays `aria-hidden` — the heading already
+   * says what the page is — but crawlers and image search still read the alt,
+   * and an empty one reads to auditors as a missing attribute.
+   */
+  imageAlt?: string;
   fallbackImage?: string;
   crumbs?: Crumb[];
   /** id of the first content section — renders the scroll cue when provided. */
@@ -38,7 +45,7 @@ export function PageHero({
         <SmartImage
           src={image}
           fallbackSrc={fallbackImage}
-          alt=""
+          alt={imageAlt ?? `${title} — HariTech industrial automation`}
           aria-hidden="true"
           width={1600}
           height={900}

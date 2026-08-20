@@ -38,7 +38,12 @@ export function Logo({
         alt="HariTech — intense to high impact"
         className={cn(sizing, "dark:hidden")}
       />
-      <img src={logoDark} alt="" aria-hidden="true" className={cn(sizing, "hidden dark:block")} />
+      <img
+        src={logoDark}
+        alt="HariTech — intense to high impact"
+        aria-hidden="true"
+        className={cn(sizing, "hidden dark:block")}
+      />
     </>
   );
 }

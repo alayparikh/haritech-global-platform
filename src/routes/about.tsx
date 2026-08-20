@@ -66,6 +66,7 @@ function About() {
         title="A systems integrator, not a vendor."
         lede="A USA–India joint venture with twenty-two years of integrating, commissioning and maintaining industrial control systems — the same team on site until the system is stable and your people can run it without us."
         image="/images/families/food-dairy-lifesciences.jpg"
+        imageAlt="Automated food and dairy processing line"
         fallbackImage={familyBySlug["food-dairy-lifesciences"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "About" }]}
         scrollTo="story"
@@ -132,7 +133,7 @@ function About() {
       <Section id="venture" tone="ink" className="relative isolate overflow-hidden">
         <img
           src={ventureImg}
-          alt=""
+          alt="The flags of India and the United States"
           aria-hidden="true"
           loading="lazy"
           width={1087}

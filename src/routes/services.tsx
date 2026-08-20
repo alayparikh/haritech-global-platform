@@ -36,6 +36,7 @@ function Services() {
         title="Everything the control system needs, under one contract."
         lede="Systems integrator for PLC, SCADA, DCS, HMI and robotics — delivered as standard packages or fully customised integration projects."
         image="/images/families/process-chemical.jpg"
+        imageAlt="Process pipework and control instrumentation in a chemical plant"
         fallbackImage={familyBySlug["process-chemical"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Services" }]}
         scrollTo="index"

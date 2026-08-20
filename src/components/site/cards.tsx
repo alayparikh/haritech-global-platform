@@ -33,7 +33,7 @@ export function FamilyCard({
       <SmartImage
         src={family.image}
         fallbackSrc={family.fallbackImage}
-        alt=""
+        alt={`${family.name} — industrial automation by HariTech`}
         aria-hidden="true"
         loading="lazy"
         width={1024}

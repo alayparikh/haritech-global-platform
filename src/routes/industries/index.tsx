@@ -33,6 +33,7 @@ function IndustriesIndex() {
         title="Every floor has its own failure mode. We engineer for yours."
         lede="Grouped into six engineering families so you can find the constraints that match your plant — then go straight to what we build there."
         image="/images/families/heavy-engineering-metals.jpg"
+        imageAlt="Heavy engineering shop floor with automated metal-handling machinery"
         fallbackImage={familyBySlug["heavy-engineering-metals"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Industries" }]}
         scrollTo="heavy-engineering-metals"

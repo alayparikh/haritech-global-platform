@@ -36,6 +36,7 @@ function Capabilities() {
         title="Built around uptime, not deliverables."
         lede="We measure our work the way your plant does: cycle time, availability, downtime and total cost of ownership over the control system's life."
         image="/images/families/mobility-electronics.jpg"
+        imageAlt="Robotic assembly line in an automotive electronics plant"
         fallbackImage={familyBySlug["mobility-electronics"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Capabilities" }]}
         scrollTo="capabilities"

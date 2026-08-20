@@ -55,6 +55,7 @@ function IndustryDetail() {
         title={industry.name}
         lede={industry.tagline}
         image={industry.image}
+        imageAlt={`${industry.name} automation — PLC, SCADA and control systems by HariTech`}
         fallbackImage={industry.fallbackImage}
         crumbs={[
           { label: "Home", to: "/" },

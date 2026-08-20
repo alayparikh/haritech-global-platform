@@ -38,6 +38,7 @@ function Projects() {
         title="Proof points across design, panels and integration."
         lede="A selection of the work behind the capability statement — what was scoped, what was built and what changed on the control system afterwards."
         image="/images/families/heavy-engineering-metals.jpg"
+        imageAlt="Control panel and machinery on a heavy engineering production line"
         fallbackImage={familyBySlug["heavy-engineering-metals"].fallbackImage}
         crumbs={[{ label: "Home", to: "/" }, { label: "Projects" }]}
         scrollTo="work"
