@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Globe2, Mail, MapPin, Phone } from "lucide-react";
 
+import buildwiseIcon from "@/assets/buildwise-icon.png";
 import { families, industriesByFamily } from "@/data/industries";
 import { company, navLinks } from "@/data/site";
 import { Container } from "./Container";
@@ -122,11 +123,33 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-ink-foreground/10">
-        <Container className="flex flex-col gap-2 py-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-3 py-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <p>
             © {new Date().getFullYear()} {company.name}. All rights reserved.
           </p>
           <p>Vadodara, Gujarat · Serving industry across India</p>
+          <a
+            href={company.builtBy.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex flex-none items-center gap-2 transition-colors hover:text-cyan"
+          >
+            <span>Built by</span>
+            {/* Decorative: the wordmark beside it already names the studio, so
+                alt text here would make a screen reader say it twice. */}
+            <img
+              src={buildwiseIcon}
+              alt=""
+              width={95}
+              height={84}
+              loading="lazy"
+              decoding="async"
+              className="h-5 w-auto"
+            />
+            <span className="font-semibold text-ink-foreground/80 transition-colors group-hover:text-cyan">
+              {company.builtBy.name}
+            </span>
+          </a>
         </Container>
       </div>
     </footer>

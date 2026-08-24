@@ -57,6 +57,11 @@ export const company = {
   mapEmbed:
     "https://www.google.com/maps?q=VR+One+NH+48+Ajwa+Waghodia+Crossing+Vadodara+390019&output=embed",
   capabilityStatement: "/haritech-capability-statement.txt",
+  /** Build credit shown in the footer bottom bar on every page. */
+  builtBy: {
+    name: "BuildWise Webs",
+    href: "https://buildwisewebs.vercel.app",
+  },
 };
 
 /**
